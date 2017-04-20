@@ -2,6 +2,49 @@
 <!DOCTYPE TS>
 <TS version="2.1">
 <context>
+    <name>About</name>
+    <message>
+        <source>About page</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Idea</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>The idea of the software is to be able to patch your own images on the map and navigate on those maps.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Translations</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Finnish (Riku Lahtinen)</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Licence</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Copyright (c) 2017, Riku Lahtinen</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Licensed under BSD. License, source code and more information:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Maps are from OpenStreetMap</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>copyright OpenStreetMap contributors</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>AddImage</name>
     <message>
         <source>Delete image</source>
@@ -21,10 +64,6 @@
     </message>
     <message>
         <source>Add or edit image</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Project name is used to be able to manage multiple images related to same topic. A combination of project name and file name has to be unique.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -67,6 +106,10 @@
         <source>Opacity</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Project name is used to be able to manage multiple images related to same topic. A combination of project name and file name has to be unique. When editing values enter key has to be pressed to make confirm the changes</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CoverPage</name>
@@ -76,17 +119,21 @@
     </message>
 </context>
 <context>
-    <name>FirstPage</name>
+    <name>Help</name>
     <message>
-        <source>Show Page 2</source>
+        <source>Help page</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>UI Template</source>
+        <source>Map view</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Hello Sailors</source>
+        <source>To edit images you have to press edit icon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>To insert new image you have to press image icon</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -98,17 +145,6 @@
     </message>
     <message>
         <source>contributors</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
-    <name>SecondPage</name>
-    <message>
-        <source>Nested Page</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Item</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -144,6 +180,10 @@
     </message>
     <message>
         <source>/home/nemo/Pictures/</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Update GPS when app is not active </source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -46,8 +46,10 @@ ApplicationWindow
     property real gpsLong // Current position, longitude
     property int gpsUpdateRate : 3000
     property bool useLocation : true // When starting, GPS is used
+    property bool gpsUpdateIdle : false // As default GPS is not updated when the app is idle
     property string folder : "/home/nemo/Pictures/" //Folder for layer images.
     property int currentIndex : -1 //Index telling the image to be edited
+    property bool addMode : true
 
     ListModel {
         id: imageInfo

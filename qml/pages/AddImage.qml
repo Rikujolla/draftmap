@@ -39,12 +39,13 @@ Page {
         PullDownMenu {
             MenuItem {
                 text: qsTr("Delete image")
+                enabled: !addMode
                 onClicked: {
                     remorse.execute(qsTr("Deleting"), console.log("remorse") , 3000 )
                 }
                 RemorsePopup { id: remorse
                 onTriggered: {
-                    //Mydbases.delLocation()
+                    Mytables.deleteImage(currentIndex)
                     pageStack.pop()
                 }
                 }
@@ -87,7 +88,8 @@ Page {
             }*/
 
             Text {
-                    text: qsTr("Project name is used to be able to manage multiple images related to same topic. A combination of project name and file name has to be unique.")
+                    text: qsTr("Project name is used to be able to manage multiple images related to same topic. A combination of project name and file name has to be unique. When editing values enter key has to be pressed to make confirm the changes")
+                    wrapMode: Text.WordWrap
                     visible: column.showHelptxt
                     color: Theme.secondaryHighlightColor
                     x: Theme.paddingLarge
@@ -113,10 +115,12 @@ Page {
                 EnterKey.enabled: !errorHighlight
                 EnterKey.iconSource: "image://theme/icon-m-enter-close"
                 EnterKey.onClicked: {
-                    console.log(currentIndex)
+                    //console.log(currentIndex)
                     focus = false
-                    //imageInfo.setProperty(currentIndex, "title", text)
-                    //imageInfo.append({"title":text})
+                    if (!addMode) {
+                        imageInfo.setProperty(currentIndex,"title",text)
+                        Mytables.addEditImage(currentIndex)
+                    }
                 }
             }
 }
@@ -129,6 +133,7 @@ Page {
 
             Text {
                     text: qsTr("File name is used as an index. ")
+                    wrapMode: Text.WordWrap
                     visible: column.showHelptxt
                     color: Theme.secondaryHighlightColor
                     x: Theme.paddingLarge
@@ -159,7 +164,10 @@ Page {
                     EnterKey.iconSource: "image://theme/icon-m-enter-close"
                     EnterKey.onClicked: {
                         focus = false
-                        //imageInfo.setProperty(currentIndex, "sourceim", text)
+                        if (!addMode) {
+                            imageInfo.setProperty(currentIndex,"sourceim",text)
+                            Mytables.addEditImage(currentIndex)
+                        }
                     }
                 }
             }
@@ -189,7 +197,10 @@ Page {
                     EnterKey.onClicked: {
                         focus = false
                         reNu = text
-                        //imageInfo.setProperty(currentIndex, "stackheight", text)
+                        if (!addMode) {
+                            imageInfo.setProperty(currentIndex,"stackheight",reNu)
+                            Mytables.addEditImage(currentIndex)
+                        }
                     }
                 }
             }
@@ -219,7 +230,10 @@ Page {
                     EnterKey.onClicked: {
                         focus = false
                         reNu = text;
-                        //imageInfo.setProperty(currentIndex, "latti", reNu)
+                        if (!addMode) {
+                            imageInfo.setProperty(currentIndex,"latti",reNu)
+                            Mytables.addEditImage(currentIndex)
+                        }
                     }
                 }
             }
@@ -249,7 +263,10 @@ Page {
                     EnterKey.onClicked: {
                         focus = false
                         reNu = text;
-                        //imageInfo.setProperty(currentIndex, "latti", reNu)
+                        if (!addMode) {
+                            imageInfo.setProperty(currentIndex,"longi",reNu)
+                            Mytables.addEditImage(currentIndex)
+                        }
                     }
                 }
             }
@@ -278,7 +295,10 @@ Page {
                     EnterKey.onClicked: {
                         focus = false
                         reNu = text;
-                        //imageInfo.setProperty(currentIndex, "latti", reNu)
+                        if (!addMode) {
+                            imageInfo.setProperty(currentIndex,"zlevel",reNu)
+                            Mytables.addEditImage(currentIndex)
+                        }
                     }
                 }
             }
@@ -307,7 +327,12 @@ Page {
                     EnterKey.onClicked: {
                         focus = false
                         reNu = text;
-                        //imageInfo.setProperty(currentIndex,"rotat",reNu)
+                        //console.log("addMode", addMode, currentIndex)
+                        if (!addMode) {
+                            imageInfo.setProperty(currentIndex,"rotat",reNu)
+                            Mytables.addEditImage(currentIndex)
+                        }
+
                     }
                 }
             }
@@ -337,7 +362,10 @@ Page {
                     EnterKey.onClicked: {
                         focus = false
                         reNu = text;
-                        //imageInfo.setProperty(currentIndex,"rotat",reNu)
+                        if (!addMode) {
+                            imageInfo.setProperty(currentIndex,"opacit",reNu)
+                            Mytables.addEditImage(currentIndex)
+                        }
                     }
                 }
             }

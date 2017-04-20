@@ -94,8 +94,9 @@ Page {
                            anchors.fill: parent
                            enabled: editIcon.editPossible
                            onClicked: {
-                               console.log("index", index)
+                               //console.log("index", index)
                                currentIndex = index
+                               addMode = false
                                pageStack.push(Qt.resolvedUrl("AddImage.qml"))
                            }
                        }
@@ -109,34 +110,22 @@ Page {
             }
 
             MapPolyline {
-                id:test
-                line.width: 5
-                line.color: 'green'
-                z:50
-                path: [
-                    { latitude: 62.36, longitude: 25.3 },
-                    { latitude: 62.36, longitude: 25.5 },
-                    { latitude: 62.36, longitude: 25.7 },
-                    { latitude: 62.36, longitude: 25.9 }
-                ]
-            }
-
-            MapPolyline {
                 id:trackLine
                 line.width: 5
                 line.color: 'red'
                 z:60
-                path: [
+                path: []
+                /*path: [
                     { latitude: 62.38, longitude: 25.3 },
                     { latitude: 62.38, longitude: 25.5 },
                     { latitude: 62.34, longitude: 25.7 },
                     { latitude: 62.34, longitude: 25.9 }
-                ]
+                ]*/
             }
 
             PositionSource {
                 id:possut
-                active:useLocation && Qt.application.active
+                active:useLocation && (Qt.application.active || gpsUpdateIdle)
                 updateInterval:gpsUpdateRate
                 onPositionChanged: {
                     gpsLat = possut.position.coordinate.latitude
@@ -203,7 +192,7 @@ Page {
                                                     ? Theme.highlightColor
                                                     : Theme.secondaryHighlightColor)
         onClicked: {
-            console.log("delete track", trackLine.path)
+            //console.log("delete track", trackLine.path)
             trackLine.path = []
         }
     }
@@ -216,8 +205,9 @@ Page {
                                                     ? Theme.highlightColor
                                                     : Theme.secondaryHighlightColor)
         onClicked: {
-            console.log("test")
+            //console.log("test")
             //pageStack.push(Qt.resolvedUrl("AddImage.qml"),{ "coordinate": map.center})
+            addMode = true
             currentIndex = imageInfo.count;
             currentLat = map.center.latitude
             currentLong = map.center.longitude
@@ -234,7 +224,6 @@ Page {
                                                     ? Theme.highlightColor
                                                     : Theme.secondaryHighlightColor)
         onClicked: {
-            //pageStack.push(Qt.resolvedUrl("Help.qml"))
             editPossible = !editPossible
         }
     }
@@ -247,8 +236,7 @@ Page {
                                                     ? Theme.highlightColor
                                                     : Theme.secondaryHighlightColor)
         onClicked: {
-            //pageStack.push(Qt.resolvedUrl("Help.qml"))
-            imageInfo.append({"title":"tiitle.text", "sourceim":"grid.png", "latti":62.3, "longi":25.7, "stackheight":60.0, "zlevel":16.5, "rotat":45.0, "opacit":1.0})
+            pageStack.push(Qt.resolvedUrl("Help.qml"))
         }
     }
 
@@ -260,12 +248,9 @@ Page {
                                                     ? Theme.highlightColor
                                                     : Theme.secondaryHighlightColor)
         onClicked: {
-            //pageStack.push(Qt.resolvedUrl("About.qml"))
-            imageInfo.setProperty(0,"rotat", 22.0)
+            pageStack.push(Qt.resolvedUrl("About.qml"))
         }
     }
-
-
 
     Component.onCompleted: {
         map.center = QtPositioning.coordinate(62.3695273+0.01,25.70485293+0.01)

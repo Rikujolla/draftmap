@@ -19,6 +19,10 @@
                 rs = tx.executeSql('SELECT * FROM Settings WHERE name = ?', 'folder');
                 if (rs.rows.length > 0) {tx.executeSql('UPDATE Settings SET valte=? WHERE name=?', [folder, 'folder'])}
                 else {tx.executeSql('INSERT INTO Settings VALUES(?, ?, ?, ?, ?)', [ 'folder', '', folder, '', '' ])}
+                // gpsUpdateIdle
+                rs = tx.executeSql('SELECT * FROM Settings WHERE name = ?', 'gpsUpdateIdle');
+                if (rs.rows.length > 0) {tx.executeSql('UPDATE Settings SET valint=? WHERE name=?', [gpsUpdateIdle, 'gpsUpdateIdle'])}
+                else {tx.executeSql('INSERT INTO Settings VALUES(?, ?, ?, ?, ?)', [ 'gpsUpdateIdle', '', '', '', gpsUpdateIdle ])}
             }
         )
     }
@@ -43,6 +47,10 @@ function loadSettings() {
             // folder
             rs = tx.executeSql('SELECT * FROM Settings WHERE name = ?', 'folder');
             if (rs.rows.length > 0) {folder = rs.rows.item(0).valte}
+            else {}
+            // gpsUpdateIdle
+            rs = tx.executeSql('SELECT * FROM Settings WHERE name = ?', 'gpsUpdateIdle');
+            if (rs.rows.length > 0) {gpsUpdateIdle = rs.rows.item(0).valint}
             else {}
         }
 

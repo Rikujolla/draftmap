@@ -1,4 +1,4 @@
-/*Copyright (c) 2016-2017, Riku Lahtinen, rikul.lajolla@kiu.as
+/*Copyright (c) 2015, Riku Lahtinen
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without
@@ -25,52 +25,34 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
-import QtQuick.LocalStorage 2.0
-import "./components/setting.js" as Mysettings
-import "./components/tables.js" as Mytables
 
 
 Page {
     id: page
 
-    // To enable PullDownMenu, place our content in a SilicaFlickable
     SilicaFlickable {
         anchors.fill: parent
 
-        // PullDownMenu and PushUpMenu must be declared in SilicaFlickable, SilicaListView or SilicaGridView
-        PullDownMenu {
-            MenuItem {
-                text: qsTr("Save settings")
-                onClicked: Mysettings.saveSettings()
-            }
-        }
+        /*PullDownMenu {
 
-        // Tell SilicaFlickable the height of its content.
+            MenuItem {
+                text: qsTr("Back to settings")
+                onClicked: pageStack.pop()
+            }
+        }*/
+
         contentHeight: column.height
 
-        // Place our content in a Column.  The PageHeader is always placed at the top
-        // of the page, followed by our content.
         Column {
             id: column
+
             width: page.width
             spacing: Theme.paddingLarge
             PageHeader {
-                title: qsTr("Settings")
+                title: qsTr("About page")
             }
 
-
-            SectionHeader { text: qsTr("GPS settings") }
-
-            TextSwitch {
-                text: qsTr("Update GPS when app is not active ")
-                visible : true
-                checked: gpsUpdateIdle
-                onCheckedChanged: {
-                    checked ? gpsUpdateIdle = true : gpsUpdateIdle = false;
-                    Mysettings.saveSettings()
-                }
-            }
-
+            SectionHeader { text: qsTr("Idea") }
             Text {
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.primaryColor
@@ -81,26 +63,11 @@ Page {
                     right: parent.right
                     margins: Theme.paddingLarge
                 }
-                text: {qsTr("Adjust GPS update rate with slider")
+                text: {qsTr("The idea of the software is to be able to patch your own images on the map and navigate on those maps.")
                 }
             }
 
-            Slider {
-                width: parent.width
-                minimumValue: 0
-                maximumValue: 10
-                stepSize: 1
-                value: gpsUpdateRate/1000
-                valueText: value >0 ? value + " " + "s" : qsTr("no update")
-                onValueChanged: {
-                    gpsUpdateRate = value * 1000
-                    value > 0 ? useLocation = true : useLocation = false
-                    Mysettings.saveSettings()
-                }
-            }
-
-            SectionHeader { text: qsTr("Path settings") }
-
+            SectionHeader { text: qsTr("Translations") }
             Text {
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.primaryColor
@@ -111,37 +78,45 @@ Page {
                     right: parent.right
                     margins: Theme.paddingLarge
                 }
-                text: {qsTr("Fill here the path of your image files.")
+                text: {
+                    qsTr("Translations") + "(https://www.transifex.com/rikujolla/trafficviewer)"
+                    qsTr("Finnish (Riku Lahtinen)")
                 }
             }
 
-
-            TextField {
-                id: path
-                placeholderText: qsTr("/home/nemo/Pictures/")
-                text: folder
-                width: page.width
-                //wrapMode:Text.WordWrap
-                inputMethodHints: Qt.ImhNoPredictiveText
-                EnterKey.enabled: text.length>0
-                EnterKey.iconSource: "image://theme/icon-m-enter-close"
-                EnterKey.onClicked: {
-                    focus = false
-                    folder=text
-                    Mysettings.saveSettings()
+            /*SectionHeader { text: qsTr("Thanks") }
+            Text {
+                font.pixelSize: Theme.fontSizeSmall
+                color: Theme.primaryColor
+                wrapMode: Text.WordWrap
+                width: parent.width
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    margins: Theme.paddingLarge
                 }
+                text: {qsTr("To Jussi Sainio and Kimmo Lindholm of the code to help to create my chart view.")
+                }
+            }*/
+
+            SectionHeader { text: qsTr("Licence") }
+            Text {
+                font.pixelSize: Theme.fontSizeSmall
+                color: Theme.primaryColor
+                wrapMode: Text.WordWrap
+                width: root.width
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    margins: Theme.paddingLarge
+                }
+                text: qsTr("Copyright (c) 2017, Riku Lahtinen") + "\n"
+                      + qsTr("Licensed under BSD. License, source code and more information:") + "\n"
+                      + ("https://github.com/Rikujolla/trafficviewer")  + "\n"
+                      + qsTr("Maps are from OpenStreetMap") + " www.openstreetmap.org, " + qsTr("copyright OpenStreetMap contributors")
             }
 
-
-
-            Component.onDestruction:{
-                Mysettings.saveSettings();
-            }
-
-
+//loppusulkeet
         }
     }
-
 }
-
-
