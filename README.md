@@ -1,0 +1,2 @@
+# draftmap
+Map for drafting
