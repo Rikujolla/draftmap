@@ -220,9 +220,12 @@ Page {
         property bool editPossible: false
         anchors.bottom: imageIcon.top
         anchors.right: page.right
-        icon.source: "image://theme/icon-m-edit?" + (pressed
+        icon.source: editPossible ? ("image://theme/icon-m-edit-selected?" + (pressed
                                                     ? Theme.highlightColor
-                                                    : Theme.secondaryHighlightColor)
+                                                    : Theme.secondaryHighlightColor))
+                             : ("image://theme/icon-m-edit?" + (pressed
+                                                                ? Theme.highlightColor
+                                                                : Theme.secondaryHighlightColor))
         onClicked: {
             editPossible = !editPossible
         }
