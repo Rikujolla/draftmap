@@ -89,6 +89,7 @@ Page {
 
             Text {
                     text: qsTr("Project name is used to be able to manage multiple images related to same topic. A combination of project name and file name has to be unique. When editing values enter key has to be pressed to make confirm the changes")
+                    width: page.width
                     wrapMode: Text.WordWrap
                     visible: column.showHelptxt
                     color: Theme.secondaryHighlightColor
@@ -131,13 +132,14 @@ Page {
                 onClicked: {}
             }*/
 
-            Text {
+            /*Text {
                     text: qsTr("File name is used as an index. ")
+                    width: page.width
                     wrapMode: Text.WordWrap
                     visible: column.showHelptxt
                     color: Theme.secondaryHighlightColor
                     x: Theme.paddingLarge
-                }
+                }*/
 
             Row {
                 x: Theme.paddingLarge
@@ -153,7 +155,7 @@ Page {
 
                 TextField {
                     id: neimi
-                    placeholderText: qsTr("img.svg")
+                    placeholderText: "img.svg"
                     text: currentIndex > imageInfo.count-1 ? "" : imageInfo.get(currentIndex).sourceim
                     width: page.width/2
                     //wrapMode:Text.WordWrap
@@ -184,7 +186,8 @@ Page {
                     wrapMode: Text.WordWrap
                 }
                 TextField {
-                    property real reNu
+                    //property real reNu
+                    property int reNu
                     id: layer
                     placeholderText: "1"
                     text: currentIndex > imageInfo.count-1 ? "" : imageInfo.get(currentIndex).stackheight

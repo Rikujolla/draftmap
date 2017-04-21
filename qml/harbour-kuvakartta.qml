@@ -73,6 +73,16 @@ ApplicationWindow
             rotat:-1.0
             opacit:0.6
         }
+        ListElement {
+            title: "Test 2018"
+            sourceim:"img_01_lay01.svg"
+            latti:62.7572
+            longi:25.7628
+            stackheight: 30
+            zlevel:15.999
+            rotat:-1.2
+            opacit:0.8
+        }
     }
 
 

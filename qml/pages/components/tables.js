@@ -5,7 +5,8 @@ function loadImages() {
     db.transaction(
                 function(tx) {
                     // Create the table, if not existing
-                    tx.executeSql('CREATE TABLE IF NOT EXISTS Images (title TEXT, sourceim TEXT, latti REAL, longi REAL, stackheight REAL, zlevel REAL, rotat REAL, opacit REAL, UNIQUE(title,sourceim))');
+                    //tx.executeSql('CREATE TABLE IF NOT EXISTS Images (title TEXT, sourceim TEXT, latti REAL, longi REAL, stackheight REAL, zlevel REAL, rotat REAL, opacit REAL, UNIQUE(title,sourceim))');
+                    tx.executeSql('CREATE TABLE IF NOT EXISTS Images (title TEXT, sourceim TEXT, latti REAL, longi REAL, stackheight INTEGER, zlevel REAL, rotat REAL, opacit REAL, UNIQUE(title,sourceim))');
 
                     var rs = tx.executeSql('SELECT * FROM Images')
                     imageInfo.clear()
@@ -25,7 +26,7 @@ function addEditImage(j) {
     db.transaction(
                 function(tx) {
                     // Create the table, if not existing
-                    tx.executeSql('CREATE TABLE IF NOT EXISTS Images (title TEXT, sourceim TEXT, latti REAL, longi REAL, stackheight REAL, zlevel REAL, rotat REAL, opacit REAL, UNIQUE(title,sourceim))');
+                    tx.executeSql('CREATE TABLE IF NOT EXISTS Images (title TEXT, sourceim TEXT, latti REAL, longi REAL, stackheight INTEGER, zlevel REAL, rotat REAL, opacit REAL, UNIQUE(title,sourceim))');
                     tx.executeSql('INSERT OR REPLACE INTO Images VALUES (?,?,?,?,?,?,?,?)', [imageInfo.get(j).title, imageInfo.get(j).sourceim, imageInfo.get(j).latti, imageInfo.get(j).longi, imageInfo.get(j).stackheight, imageInfo.get(j).zlevel, imageInfo.get(j).rotat, imageInfo.get(j).opacit])
                 }
                 )
@@ -39,7 +40,7 @@ function deleteImage(j) {
     db.transaction(
                 function(tx) {
                     // Create the table, if not existing
-                    tx.executeSql('CREATE TABLE IF NOT EXISTS Images (title TEXT, sourceim TEXT, latti REAL, longi REAL, stackheight REAL, zlevel REAL, rotat REAL, opacit REAL, UNIQUE(title,sourceim))');
+                    tx.executeSql('CREATE TABLE IF NOT EXISTS Images (title TEXT, sourceim TEXT, latti REAL, longi REAL, stackheight INTEGER, zlevel REAL, rotat REAL, opacit REAL, UNIQUE(title,sourceim))');
                     tx.executeSql('DELETE FROM Images WHERE title=? AND sourceim=?', [imageInfo.get(j).title, imageInfo.get(j).sourceim]);
                 }
                 )

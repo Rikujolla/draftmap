@@ -118,7 +118,7 @@ Page {
 
             TextField {
                 id: path
-                placeholderText: qsTr("/home/nemo/Pictures/")
+                placeholderText: "/home/nemo/Pictures/"
                 text: folder
                 width: page.width
                 //wrapMode:Text.WordWrap

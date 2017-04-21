@@ -112,7 +112,7 @@ Page {
                 }
                 text: qsTr("Copyright (c) 2017, Riku Lahtinen") + "\n"
                       + qsTr("Licensed under BSD. License, source code and more information:") + "\n"
-                      + ("https://github.com/Rikujolla/trafficviewer")  + "\n"
+                      + ("https://github.com/Rikujolla/draftmap")  + "\n"
                       + qsTr("Maps are from OpenStreetMap") + " www.openstreetmap.org, " + qsTr("copyright OpenStreetMap contributors")
             }
 

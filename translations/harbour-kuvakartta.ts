@@ -71,15 +71,7 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>File name is used as an index. </source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>File name</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>img.svg</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -114,7 +106,7 @@
 <context>
     <name>CoverPage</name>
     <message>
-        <source>My Cover</source>
+        <source>Draft map</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -129,11 +121,15 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>To edit images you have to press edit icon</source>
+        <source>- To edit images press the edit icon</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>To insert new image you have to press image icon</source>
+        <source>- To insert a new image press the image icon</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>- To delete the path press the image icon</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -176,10 +172,6 @@
     </message>
     <message>
         <source>Fill here the path of your image files.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>/home/nemo/Pictures/</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
