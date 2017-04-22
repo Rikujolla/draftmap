@@ -52,9 +52,14 @@ Page {
             }
             MenuItem {
                 text: qsTr("Add image")
-                enabled: !tiitle.errorHighlight && !neimi.errorHighlight && !latti.errorHighlight && !longi.errorHighlight
+                enabled: !tiitle.errorHighlight && !neimi.errorHighlight && !layer.errorHighlight && !latti.errorHighlight && !longi.errorHighlight && !zoomi.errorHighlight && !rotatio.errorHighlight && !opasiit.errorHighlight
                 onClicked: {
-                    //imageInfo.append({"title":tiitle.text, "sourceim":neimi.text, "latti":latti.reNu, "longi":longi.reNu, "stackheight":layer.text, "zlevel":16.5, "rotat":45.0, "opacit":1.0})
+                    latti.reNu = latti.text;
+                    longi.reNu = longi.text;
+                    layer.reNu = layer.text;
+                    zoomi.reNu = zoomi.text;
+                    rotatio.reNu = rotatio.text;
+                    opasiit.reNu = opasiit.text;
                     imageInfo.append({"title":tiitle.text, "sourceim":neimi.text, "latti":latti.reNu, "longi":longi.reNu, "stackheight":layer.reNu, "zlevel":zoomi.reNu, "rotat":rotatio.reNu, "opacit":opasiit.reNu})
                     Mytables.addEditImage(currentIndex)
                 }
