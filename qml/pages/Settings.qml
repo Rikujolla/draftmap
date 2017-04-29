@@ -118,7 +118,7 @@ Page {
 
             TextField {
                 id: path
-                placeholderText: "/home/nemo/Pictures/"
+                placeholderText: "$HOME/Pictures/"
                 text: folder
                 width: page.width
                 //wrapMode:Text.WordWrap

@@ -29,22 +29,14 @@ import QtPositioning 5.2
 //import QtQuick.XmlListModel 2.0
 import QtLocation 5.0
 import QtQuick.LocalStorage 2.0
+import "./components/setting.js" as Mysettings
 import "components/tables.js" as Mytables
 
 
 Page {
     id: page
     onStatusChanged: {
-        /*if (searchDone) {
-            map.center = QtPositioning.coordinate(searchLatti+0.01, searchLongi+0.01)
-            map.center = QtPositioning.coordinate(searchLatti, searchLongi)
-            map.zoomLevel = 14.5
-            searchDone = false*/
-        //}
-
-        //map.center = QtPositioning.coordinate(62.3695273+0.01,25.70485293+0.01)
-        //map.center = QtPositioning.coordinate(62.3695273,25.70485293)
-        //console.log("load images")
+        Mysettings.loadSettings()
         Mytables.loadImages()
     }
 
@@ -87,25 +79,31 @@ Page {
                     id:velTex
                     sourceItem:
                         Image{
+                        id:patchedImage
                         source:folder + sourceim
                         opacity:opacit
                         rotation:rotat
-                       MouseArea {
-                           anchors.fill: parent
-                           enabled: editIcon.editPossible
-                           onClicked: {
-                               //console.log("index", index)
-                               currentIndex = index
-                               addMode = false
-                               pageStack.push(Qt.resolvedUrl("AddImage.qml"))
-                           }
-                       }
+                        MouseArea {
+                            anchors.fill: parent
+                            enabled: editIcon.editPossible
+                            onClicked: {
+                                //console.log("im width", patchedImage.width, patchedImage.height)
+                                currentIndex = index
+                                addMode = false
+                                pageStack.push(Qt.resolvedUrl("AddImage.qml"))
+                            }
+                        }
                     }
                     zoomLevel: zlevel
                     z:stackheight
                     coordinate: QtPositioning.coordinate(latti,longi)
                     //anchorPoint: Qt.point(velTex.sourceItem.width * 0.5,velTex.sourceItem.height * 0.5)
                     //anchorPoint: Qt.point(0.0,0.0)
+                    Component.onCompleted: {
+                        patchedImage.width = patchedImage.width*widthscale
+                        patchedImage.height= patchedImage.height*heightscale
+
+                    }
                 }
             }
 
@@ -115,12 +113,6 @@ Page {
                 line.color: 'red'
                 z:60
                 path: []
-                /*path: [
-                    { latitude: 62.38, longitude: 25.3 },
-                    { latitude: 62.38, longitude: 25.5 },
-                    { latitude: 62.34, longitude: 25.7 },
-                    { latitude: 62.34, longitude: 25.9 }
-                ]*/
             }
 
             PositionSource {
@@ -130,25 +122,20 @@ Page {
                 onPositionChanged: {
                     gpsLat = possut.position.coordinate.latitude
                     gpsLong = possut.position.coordinate.longitude
-                    //currentLat = map.center.latitude
-                    //currentLong = map.center.longitude
                     trackLine.addCoordinate(QtPositioning.coordinate(gpsLat, gpsLong))
-                    //console.log(trackLine.path)
                 }
             }
-
-
         }
 
     }
 
 
     Text{
-            font.pixelSize: Theme.fontSizeSmall
-            text: qsTr("Map data") + " © " + "<a href=\'http://www.openstreetmap.org/copyright\'>OpenStreetMap</a> " + qsTr("contributors")
-            anchors.bottom : page.bottom
-            onLinkActivated: Qt.openUrlExternally(link)
-        }
+        font.pixelSize: Theme.fontSizeSmall
+        text: qsTr("Map data") + " © " + "<a href=\'http://www.openstreetmap.org/copyright\'>OpenStreetMap</a> " + qsTr("contributors")
+        anchors.bottom : page.bottom
+        onLinkActivated: Qt.openUrlExternally(link)
+    }
 
     ////////////////////////////
     /// Icons Section
@@ -160,15 +147,15 @@ Page {
         anchors.bottom: page.bottom
         anchors.right: page.right
         icon.source: "image://theme/icon-m-gps?" + (useLocation ? (pressed
-                                                    ? Theme.highlightColor
-                                                    : Theme.secondaryHighlightColor): "red")
+                                                                   ? Theme.highlightColor
+                                                                   : Theme.secondaryHighlightColor): "red")
         onClicked: {
             if (useLocation) {
-            map.center.latitude = gpsLat
-            map.center.longitude = gpsLong
+                map.center.latitude = gpsLat
+                map.center.longitude = gpsLong
             }
             else {}
-            }
+        }
     }
 
     IconButton {
@@ -176,8 +163,8 @@ Page {
         anchors.bottom: gpsIcon.top
         anchors.right: page.right
         icon.source: "image://theme/icon-m-developer-mode?" + (pressed
-                                                    ? Theme.highlightColor
-                                                    : Theme.secondaryHighlightColor)
+                                                               ? Theme.highlightColor
+                                                               : Theme.secondaryHighlightColor)
         onClicked: {
             pageStack.push(Qt.resolvedUrl("Settings.qml"))
 
@@ -189,10 +176,9 @@ Page {
         anchors.bottom: settingsIcon.top
         anchors.right: page.right
         icon.source: "image://theme/icon-m-delete?" + (pressed
-                                                    ? Theme.highlightColor
-                                                    : Theme.secondaryHighlightColor)
+                                                       ? Theme.highlightColor
+                                                       : Theme.secondaryHighlightColor)
         onClicked: {
-            //console.log("delete track", trackLine.path)
             trackLine.path = []
         }
     }
@@ -202,16 +188,15 @@ Page {
         anchors.bottom: deleteTrackIcon.top
         anchors.right: page.right
         icon.source: "image://theme/icon-m-image?" + (pressed
-                                                    ? Theme.highlightColor
-                                                    : Theme.secondaryHighlightColor)
+                                                      ? Theme.highlightColor
+                                                      : Theme.secondaryHighlightColor)
         onClicked: {
-            //console.log("test")
-            //pageStack.push(Qt.resolvedUrl("AddImage.qml"),{ "coordinate": map.center})
             addMode = true
             currentIndex = imageInfo.count;
             currentLat = map.center.latitude
             currentLong = map.center.longitude
             pageStack.push(Qt.resolvedUrl("AddImage.qml"))
+            //console.log(map.zoomLevel)
         }
     }
 
@@ -221,11 +206,11 @@ Page {
         anchors.bottom: imageIcon.top
         anchors.right: page.right
         icon.source: editPossible ? ("image://theme/icon-m-edit-selected?" + (pressed
-                                                    ? Theme.highlightColor
-                                                    : Theme.secondaryHighlightColor))
-                             : ("image://theme/icon-m-edit?" + (pressed
-                                                                ? Theme.highlightColor
-                                                                : Theme.secondaryHighlightColor))
+                                                                              ? Theme.highlightColor
+                                                                              : Theme.secondaryHighlightColor))
+                                  : ("image://theme/icon-m-edit?" + (pressed
+                                                                     ? Theme.highlightColor
+                                                                     : Theme.secondaryHighlightColor))
         onClicked: {
             editPossible = !editPossible
         }
@@ -236,8 +221,8 @@ Page {
         anchors.bottom: editIcon.top
         anchors.right: page.right
         icon.source: "image://theme/icon-m-question?" + (pressed
-                                                    ? Theme.highlightColor
-                                                    : Theme.secondaryHighlightColor)
+                                                         ? Theme.highlightColor
+                                                         : Theme.secondaryHighlightColor)
         onClicked: {
             pageStack.push(Qt.resolvedUrl("Help.qml"))
         }
@@ -248,8 +233,8 @@ Page {
         anchors.bottom: helpIcon.top
         anchors.right: page.right
         icon.source: "image://theme/icon-m-about?" + (pressed
-                                                    ? Theme.highlightColor
-                                                    : Theme.secondaryHighlightColor)
+                                                      ? Theme.highlightColor
+                                                      : Theme.secondaryHighlightColor)
         onClicked: {
             pageStack.push(Qt.resolvedUrl("About.qml"))
         }
@@ -258,8 +243,6 @@ Page {
     Component.onCompleted: {
         map.center = QtPositioning.coordinate(62.3695273+0.01,25.70485293+0.01)
         map.center = QtPositioning.coordinate(62.3695273,25.70485293)
-        //currentLat = map.center.latitude
-        //currentLong = map.center.longitude
     }
 }
 

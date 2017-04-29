@@ -47,9 +47,11 @@ ApplicationWindow
     property int gpsUpdateRate : 3000
     property bool useLocation : true // When starting, GPS is used
     property bool gpsUpdateIdle : false // As default GPS is not updated when the app is idle
-    property string folder : "/home/nemo/Pictures/" //Folder for layer images.
+    property string folder : "$HOME/Pictures/" //Folder for layer images.
     property int currentIndex : -1 //Index telling the image to be edited
     property bool addMode : true
+    property int dbVersion:2 //
+    property bool showHelptxt : true //
 
     ListModel {
         id: imageInfo
@@ -62,6 +64,8 @@ ApplicationWindow
             zlevel: 16.5
             rotat:45.0
             opacit:1.0
+            widthscale:1.0
+            heightscale:1.0
         }
         ListElement {
             title: "Test 2018"
@@ -72,6 +76,8 @@ ApplicationWindow
             zlevel:16.055
             rotat:-1.0
             opacit:0.6
+            widthscale:1.0
+            heightscale:1.0
         }
         ListElement {
             title: "Test 2018"
@@ -82,12 +88,16 @@ ApplicationWindow
             zlevel:15.999
             rotat:-1.2
             opacit:0.8
+            widthscale:1.0
+            heightscale:1.0
         }
     }
 
 
 
-    Component.onCompleted: Mysettings.loadSettings()
+    Component.onCompleted: {
+        //Mysettings.loadSettings()
+    }
 
 }
 

@@ -23,6 +23,14 @@
                 rs = tx.executeSql('SELECT * FROM Settings WHERE name = ?', 'gpsUpdateIdle');
                 if (rs.rows.length > 0) {tx.executeSql('UPDATE Settings SET valint=? WHERE name=?', [gpsUpdateIdle, 'gpsUpdateIdle'])}
                 else {tx.executeSql('INSERT INTO Settings VALUES(?, ?, ?, ?, ?)', [ 'gpsUpdateIdle', '', '', '', gpsUpdateIdle ])}
+                // dbVersion
+                rs = tx.executeSql('SELECT * FROM Settings WHERE name = ?', 'dbVersion');
+                if (rs.rows.length > 0) {tx.executeSql('UPDATE Settings SET valint=? WHERE name=?', [dbVersion, 'dbVersion'])}
+                else {tx.executeSql('INSERT INTO Settings VALUES(?, ?, ?, ?, ?)', [ 'dbVersion', '', '', '', dbVersion ])}
+                // showHelptxt
+                rs = tx.executeSql('SELECT * FROM Settings WHERE name = ?', 'showHelptxt');
+                if (rs.rows.length > 0) {tx.executeSql('UPDATE Settings SET valint=? WHERE name=?', [showHelptxt, 'showHelptxt'])}
+                else {tx.executeSql('INSERT INTO Settings VALUES(?, ?, ?, ?, ?)', [ 'showHelptxt', '', '', '', showHelptxt ])}
             }
         )
     }
@@ -51,6 +59,14 @@ function loadSettings() {
             // gpsUpdateIdle
             rs = tx.executeSql('SELECT * FROM Settings WHERE name = ?', 'gpsUpdateIdle');
             if (rs.rows.length > 0) {gpsUpdateIdle = rs.rows.item(0).valint}
+            else {}
+            // dbVersion
+            rs = tx.executeSql('SELECT * FROM Settings WHERE name = ?', 'dbVersion');
+            if (rs.rows.length > 0) {dbVersion = rs.rows.item(0).valint}
+            else {}
+            // showHelptxt
+            rs = tx.executeSql('SELECT * FROM Settings WHERE name = ?', 'showHelptxt');
+            if (rs.rows.length > 0) {showHelptxt = rs.rows.item(0).valint}
             else {}
         }
 

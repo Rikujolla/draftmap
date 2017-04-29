@@ -100,6 +100,14 @@
         <source>Project name is used to be able to manage multiple images related to same topic. A combination of project name and file name has to be unique. When editing values enter key has to be pressed to make confirm the changes</source>
         <translation>Projektia käytetään saman aihepiirin kuvien hallintaan. Projektinimen ja tiedostonimen yhdistelmän täytyy olla yksikäsitteinen. Muokatessa arvoja näppäimistön Enter-näppäintä täytyy painaa, jotta muutokset tallentuvat.</translation>
     </message>
+    <message>
+        <source>Width scale</source>
+        <translation>Leveysskaala</translation>
+    </message>
+    <message>
+        <source>Height scale</source>
+        <translation>Korkeusskaala</translation>
+    </message>
 </context>
 <context>
     <name>CoverPage</name>

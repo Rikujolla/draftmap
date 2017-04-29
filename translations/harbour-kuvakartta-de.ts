@@ -102,6 +102,14 @@
         <source>Project name is used to be able to manage multiple images related to same topic. A combination of project name and file name has to be unique. When editing values enter key has to be pressed to make confirm the changes</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Width scale</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Height scale</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>CoverPage</name>

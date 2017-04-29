@@ -26,6 +26,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 import QtQuick 2.0
 import Sailfish.Silica 1.0
 import QtQuick.LocalStorage 2.0
+import "./components/setting.js" as Mysettings
 import "components/tables.js" as Mytables
 
 Page {
@@ -44,10 +45,10 @@ Page {
                     remorse.execute(qsTr("Deleting"), console.log("remorse") , 3000 )
                 }
                 RemorsePopup { id: remorse
-                onTriggered: {
-                    Mytables.deleteImage(currentIndex)
-                    pageStack.pop()
-                }
+                    onTriggered: {
+                        Mytables.deleteImage(currentIndex)
+                        pageStack.pop()
+                    }
                 }
             }
             MenuItem {
@@ -60,16 +61,20 @@ Page {
                     zoomi.reNu = zoomi.text;
                     rotatio.reNu = rotatio.text;
                     opasiit.reNu = opasiit.text;
-                    imageInfo.append({"title":tiitle.text, "sourceim":neimi.text, "latti":latti.reNu, "longi":longi.reNu, "stackheight":layer.reNu, "zlevel":zoomi.reNu, "rotat":rotatio.reNu, "opacit":opasiit.reNu})
+                    widthscale.reNu = widthscale.text;
+                    heightscale.reNu = heightscale.text;
+                    //imageInfo.append({"title":tiitle.text, "sourceim":neimi.text, "latti":latti.reNu, "longi":longi.reNu, "stackheight":layer.reNu, "zlevel":zoomi.reNu, "rotat":rotatio.reNu, "opacit":opasiit.reNu})
+                    imageInfo.append({"title":tiitle.text, "sourceim":neimi.text, "latti":latti.reNu, "longi":longi.reNu, "stackheight":layer.reNu, "zlevel":zoomi.reNu, "rotat":rotatio.reNu, "opacit":opasiit.reNu, "widthscale":widthscale.reNu, "heightscale":heightscale.reNu})
                     Mytables.addEditImage(currentIndex)
                 }
             }
             MenuItem {
                 text: qsTr("Show/hide help texts")
                 onClicked: {
-                    column.showHelptxt = !column.showHelptxt
+                    showHelptxt = !showHelptxt;
+                    Mysettings.saveSettings();
                 }
-           }
+            }
         }
 
         contentHeight: column.height
@@ -83,23 +88,14 @@ Page {
                 title: qsTr("Add or edit image")
             }
 
-            property bool showHelptxt : true
-
-            /*BackgroundItem {
-                SectionHeader {
-                    text: qsTr("Image title")
-                }
-                onClicked: {}
-            }*/
-
             Text {
-                    text: qsTr("Project name is used to be able to manage multiple images related to same topic. A combination of project name and file name has to be unique. When editing values enter key has to be pressed to make confirm the changes")
-                    width: page.width
-                    wrapMode: Text.WordWrap
-                    visible: column.showHelptxt
-                    color: Theme.secondaryHighlightColor
-                    x: Theme.paddingLarge
-                }
+                text: qsTr("Project name is used to be able to manage multiple images related to same topic. A combination of project name and file name has to be unique. When editing values enter key has to be pressed to make confirm the changes")
+                width: page.width*0.9
+                wrapMode: Text.WordWrap
+                visible: showHelptxt
+                color: Theme.secondaryHighlightColor
+                x: Theme.paddingLarge
+            }
 
             Row {
                 x: Theme.paddingLarge
@@ -111,40 +107,24 @@ Page {
                     width:page.width/3
                     wrapMode: Text.WordWrap
                 }
-            TextField {
-                id: tiitle
-                width: page.width/2
-                text: currentIndex > imageInfo.count-1 ? "" : imageInfo.get(currentIndex).title
-                validator: RegExpValidator { regExp: /^\S*$/}
-                color: errorHighlight? "red" : Theme.primaryColor
-                inputMethodHints: Qt.ImhNoPredictiveText
-                EnterKey.enabled: !errorHighlight
-                EnterKey.iconSource: "image://theme/icon-m-enter-close"
-                EnterKey.onClicked: {
-                    //console.log(currentIndex)
-                    focus = false
-                    if (!addMode) {
-                        imageInfo.setProperty(currentIndex,"title",text)
-                        Mytables.addEditImage(currentIndex)
+                TextField {
+                    id: tiitle
+                    width: page.width/2
+                    text: currentIndex > imageInfo.count-1 ? "" : imageInfo.get(currentIndex).title
+                    validator: RegExpValidator { regExp: /^\S*$/}
+                    color: errorHighlight? "red" : Theme.primaryColor
+                    inputMethodHints: Qt.ImhNoPredictiveText
+                    EnterKey.enabled: !errorHighlight
+                    EnterKey.iconSource: "image://theme/icon-m-enter-close"
+                    EnterKey.onClicked: {
+                        focus = false
+                        if (!addMode) {
+                            imageInfo.setProperty(currentIndex,"title",text)
+                            Mytables.addEditImage(currentIndex)
+                        }
                     }
                 }
             }
-}
-            /*BackgroundItem {
-                SectionHeader {
-                    text: qsTr("Image file info")
-                }
-                onClicked: {}
-            }*/
-
-            /*Text {
-                    text: qsTr("File name is used as an index. ")
-                    width: page.width
-                    wrapMode: Text.WordWrap
-                    visible: column.showHelptxt
-                    color: Theme.secondaryHighlightColor
-                    x: Theme.paddingLarge
-                }*/
 
             Row {
                 x: Theme.paddingLarge
@@ -250,11 +230,11 @@ Page {
                 x: Theme.paddingLarge
                 spacing: Theme.paddingMedium
                 Text {
-                        text: qsTr("Longitude")
-                        color: Theme.secondaryHighlightColor
-                        x: Theme.paddingLarge
-                        width: page.width/3
-                    }
+                    text: qsTr("Longitude")
+                    color: Theme.secondaryHighlightColor
+                    x: Theme.paddingLarge
+                    width: page.width/3
+                }
 
                 TextField {
                     property real reNu
@@ -283,11 +263,11 @@ Page {
                 x: Theme.paddingLarge
                 spacing: Theme.paddingMedium
                 Text {
-                        text: qsTr("Zoom level")
-                        color: Theme.secondaryHighlightColor
-                        x: Theme.paddingLarge
-                        width: page.width/3
-                    }
+                    text: qsTr("Zoom level")
+                    color: Theme.secondaryHighlightColor
+                    x: Theme.paddingLarge
+                    width: page.width/3
+                }
 
                 TextField {
                     property real reNu
@@ -315,11 +295,11 @@ Page {
                 x: Theme.paddingLarge
                 spacing: Theme.paddingMedium
                 Text {
-                        text: qsTr("Rotation")
-                        color: Theme.secondaryHighlightColor
-                        x: Theme.paddingLarge
-                        width: page.width/3
-                    }
+                    text: qsTr("Rotation")
+                    color: Theme.secondaryHighlightColor
+                    x: Theme.paddingLarge
+                    width: page.width/3
+                }
 
                 TextField {
                     property real reNu
@@ -349,11 +329,11 @@ Page {
                 x: Theme.paddingLarge
                 spacing: Theme.paddingMedium
                 Text {
-                        text: qsTr("Opacity") + " [0-1]"
-                        color: Theme.secondaryHighlightColor
-                        x: Theme.paddingLarge
-                        width: page.width/3
-                    }
+                    text: qsTr("Opacity") + " [0-1]"
+                    color: Theme.secondaryHighlightColor
+                    x: Theme.paddingLarge
+                    width: page.width/3
+                }
 
                 TextField {
                     property real reNu
@@ -374,6 +354,74 @@ Page {
                             imageInfo.setProperty(currentIndex,"opacit",reNu)
                             Mytables.addEditImage(currentIndex)
                         }
+                    }
+                }
+            }
+
+            Row {
+                x: Theme.paddingLarge
+                spacing: Theme.paddingMedium
+                Text {
+                    text: qsTr("Width scale")
+                    color: Theme.secondaryHighlightColor
+                    x: Theme.paddingLarge
+                    width: page.width/3
+                }
+
+                TextField {
+                    property real reNu
+                    id: widthscale
+                    placeholderText: "1.0"
+                    text: currentIndex > imageInfo.count-1 ? 1.0 : imageInfo.get(currentIndex).widthscale
+                    width: page.width/2
+                    validator: RegExpValidator { regExp: /^(\-?\d?\d?\d\.\d*)|(\-?\d*)$/ }
+                    color: errorHighlight? "red" : Theme.primaryColor
+                    inputMethodHints: Qt.ImhNoPredictiveText
+                    EnterKey.enabled: !errorHighlight
+                    EnterKey.iconSource: "image://theme/icon-m-enter-close"
+                    EnterKey.onClicked: {
+                        focus = false
+                        reNu = text;
+                        //console.log("addMode", addMode, currentIndex)
+                        if (!addMode) {
+                            imageInfo.setProperty(currentIndex,"widthscale",reNu)
+                            Mytables.addEditImage(currentIndex)
+                        }
+
+                    }
+                }
+            }
+
+            Row {
+                x: Theme.paddingLarge
+                spacing: Theme.paddingMedium
+                Text {
+                    text: qsTr("Height scale")
+                    color: Theme.secondaryHighlightColor
+                    x: Theme.paddingLarge
+                    width: page.width/3
+                }
+
+                TextField {
+                    property real reNu
+                    id: heightscale
+                    placeholderText: "1.0"
+                    text: currentIndex > imageInfo.count-1 ? 1.0 : imageInfo.get(currentIndex).heightscale
+                    width: page.width/2
+                    validator: RegExpValidator { regExp: /^(\-?\d?\d?\d\.\d*)|(\-?\d*)$/ }
+                    color: errorHighlight? "red" : Theme.primaryColor
+                    inputMethodHints: Qt.ImhNoPredictiveText
+                    EnterKey.enabled: !errorHighlight
+                    EnterKey.iconSource: "image://theme/icon-m-enter-close"
+                    EnterKey.onClicked: {
+                        focus = false
+                        reNu = text;
+                        //console.log("addMode", addMode, currentIndex)
+                        if (!addMode) {
+                            imageInfo.setProperty(currentIndex,"heightscale",reNu)
+                            Mytables.addEditImage(currentIndex)
+                        }
+
                     }
                 }
             }
