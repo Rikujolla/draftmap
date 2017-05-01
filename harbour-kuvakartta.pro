@@ -18,7 +18,6 @@ SOURCES += src/harbour-kuvakartta.cpp
 
 OTHER_FILES += qml/harbour-kuvakartta.qml \
     qml/cover/CoverPage.qml \
-    rpm/harbour-kuvakartta.changes.in \
     rpm/harbour-kuvakartta.spec \
     rpm/harbour-kuvakartta.yaml \
     translations/*.ts \
@@ -43,4 +42,5 @@ DISTFILES += \
     qml/pages/components/setting.js \
     qml/pages/Settings.qml \
     qml/pages/Help.qml \
-    qml/pages/About.qml
+    qml/pages/About.qml \
+    rpm/harbour-kuvakartta.changes
