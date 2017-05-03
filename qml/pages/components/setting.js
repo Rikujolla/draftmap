@@ -31,6 +31,10 @@
                 rs = tx.executeSql('SELECT * FROM Settings WHERE name = ?', 'showHelptxt');
                 if (rs.rows.length > 0) {tx.executeSql('UPDATE Settings SET valint=? WHERE name=?', [showHelptxt, 'showHelptxt'])}
                 else {tx.executeSql('INSERT INTO Settings VALUES(?, ?, ?, ?, ?)', [ 'showHelptxt', '', '', '', showHelptxt ])}
+                // iconsVisible
+                rs = tx.executeSql('SELECT * FROM Settings WHERE name = ?', 'iconsVisible');
+                if (rs.rows.length > 0) {tx.executeSql('UPDATE Settings SET valint=? WHERE name=?', [iconsVisible, 'iconsVisible'])}
+                else {tx.executeSql('INSERT INTO Settings VALUES(?, ?, ?, ?, ?)', [ 'iconsVisible', '', '', '', iconsVisible ])}
             }
         )
     }
@@ -67,6 +71,10 @@ function loadSettings() {
             // showHelptxt
             rs = tx.executeSql('SELECT * FROM Settings WHERE name = ?', 'showHelptxt');
             if (rs.rows.length > 0) {showHelptxt = rs.rows.item(0).valint}
+            else {}
+            // iconsVisible
+            rs = tx.executeSql('SELECT * FROM Settings WHERE name = ?', 'iconsVisible');
+            if (rs.rows.length > 0) {iconsVisible = rs.rows.item(0).valint}
             else {}
         }
 

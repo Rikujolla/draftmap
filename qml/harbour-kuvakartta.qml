@@ -52,6 +52,7 @@ ApplicationWindow
     property bool addMode : true
     property int dbVersion:2 //
     property bool showHelptxt : true //
+    property bool iconsVisible : true
 
     ListModel {
         id: imageInfo

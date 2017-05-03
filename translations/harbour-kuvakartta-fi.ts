@@ -41,6 +41,10 @@
         <source>copyright OpenStreetMap contributors</source>
         <translation>copyright OpenStreetMap tekijät</translation>
     </message>
+    <message>
+        <source>Swedish (Åke Engelbrektson)</source>
+        <translation>Ruotsiksi (Åke Engelbrektson)</translation>
+    </message>
 </context>
 <context>
     <name>AddImage</name>

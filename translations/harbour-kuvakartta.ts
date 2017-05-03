@@ -43,6 +43,10 @@
         <source>copyright OpenStreetMap contributors</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <source>Swedish (Åke Engelbrektson)</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>AddImage</name>

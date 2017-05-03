@@ -143,12 +143,21 @@ Page {
 
 
     IconButton {
-        id:gpsIcon
+        id: listIcon
         anchors.bottom: page.bottom
         anchors.right: page.right
-        icon.source: "image://theme/icon-m-gps?" + (useLocation ? (pressed
-                                                                   ? Theme.highlightColor
-                                                                   : Theme.secondaryHighlightColor): "red")
+        icon.source: "image://theme/icon-m-menu?" + "black"
+        onClicked: {
+            iconsVisible = !iconsVisible
+            Mysettings.saveSettings()
+        }
+    }
+
+    IconButton {
+        id:gpsIcon
+        anchors.bottom: listIcon.top
+        anchors.right: page.right
+        icon.source: "image://theme/icon-m-gps?" + (useLocation ? "black" : "red")
         onClicked: {
             if (useLocation) {
                 map.center.latitude = gpsLat
@@ -158,13 +167,13 @@ Page {
         }
     }
 
+
     IconButton {
         id: settingsIcon
+        visible: iconsVisible
         anchors.bottom: gpsIcon.top
         anchors.right: page.right
-        icon.source: "image://theme/icon-m-developer-mode?" + (pressed
-                                                               ? Theme.highlightColor
-                                                               : Theme.secondaryHighlightColor)
+        icon.source: "image://theme/icon-m-developer-mode?" + "black"
         onClicked: {
             pageStack.push(Qt.resolvedUrl("Settings.qml"))
 
@@ -173,11 +182,10 @@ Page {
 
     IconButton {
         id: deleteTrackIcon
+        visible: iconsVisible
         anchors.bottom: settingsIcon.top
         anchors.right: page.right
-        icon.source: "image://theme/icon-m-delete?" + (pressed
-                                                       ? Theme.highlightColor
-                                                       : Theme.secondaryHighlightColor)
+        icon.source: "image://theme/icon-m-delete?" + "black"
         onClicked: {
             trackLine.path = []
         }
@@ -185,11 +193,10 @@ Page {
 
     IconButton {
         id: imageIcon
+        visible: iconsVisible
         anchors.bottom: deleteTrackIcon.top
         anchors.right: page.right
-        icon.source: "image://theme/icon-m-image?" + (pressed
-                                                      ? Theme.highlightColor
-                                                      : Theme.secondaryHighlightColor)
+        icon.source: "image://theme/icon-m-image?" + "black"
         onClicked: {
             addMode = true
             currentIndex = imageInfo.count;
@@ -203,14 +210,11 @@ Page {
     IconButton {
         id: editIcon
         property bool editPossible: false
+        visible: iconsVisible
         anchors.bottom: imageIcon.top
         anchors.right: page.right
-        icon.source: editPossible ? ("image://theme/icon-m-edit-selected?" + (pressed
-                                                                              ? Theme.highlightColor
-                                                                              : Theme.secondaryHighlightColor))
-                                  : ("image://theme/icon-m-edit?" + (pressed
-                                                                     ? Theme.highlightColor
-                                                                     : Theme.secondaryHighlightColor))
+        icon.source: editPossible ? "image://theme/icon-m-edit-selected?" + "black"
+                                  : "image://theme/icon-m-edit?" + "black"
         onClicked: {
             editPossible = !editPossible
         }
@@ -218,11 +222,10 @@ Page {
 
     IconButton {
         id: helpIcon
+        visible: iconsVisible
         anchors.bottom: editIcon.top
         anchors.right: page.right
-        icon.source: "image://theme/icon-m-question?" + (pressed
-                                                         ? Theme.highlightColor
-                                                         : Theme.secondaryHighlightColor)
+        icon.source: "image://theme/icon-m-question?" + "black"
         onClicked: {
             pageStack.push(Qt.resolvedUrl("Help.qml"))
         }
@@ -230,11 +233,10 @@ Page {
 
     IconButton {
         id: aboutIcon
+        visible: iconsVisible
         anchors.bottom: helpIcon.top
         anchors.right: page.right
-        icon.source: "image://theme/icon-m-about?" + (pressed
-                                                      ? Theme.highlightColor
-                                                      : Theme.secondaryHighlightColor)
+        icon.source: "image://theme/icon-m-about?" + "black"
         onClicked: {
             pageStack.push(Qt.resolvedUrl("About.qml"))
         }

@@ -79,8 +79,10 @@ Page {
                     margins: Theme.paddingLarge
                 }
                 text: {
-                    qsTr("Translations") + "(https://www.transifex.com/rikujolla/trafficviewer)"
-                    qsTr("Finnish (Riku Lahtinen)")
+                    //qsTr("Translations") +
+                    "www.transifex.com/rikujolla/draftmap" + "\n" +
+                    qsTr("Finnish (Riku Lahtinen)") + "\n" +
+                    qsTr("Swedish (Åke Engelbrektson)")
                 }
             }
 
@@ -95,7 +97,7 @@ Page {
                     right: parent.right
                     margins: Theme.paddingLarge
                 }
-                text: {qsTr("To Jussi Sainio and Kimmo Lindholm of the code to help to create my chart view.")
+                text: {qsTr("To .")
                 }
             }*/
 

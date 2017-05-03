@@ -43,4 +43,5 @@ DISTFILES += \
     qml/pages/Settings.qml \
     qml/pages/Help.qml \
     qml/pages/About.qml \
-    rpm/harbour-kuvakartta.changes
+    rpm/harbour-kuvakartta.changes \
+    translations/harbour-kuvakartta-sv.ts
