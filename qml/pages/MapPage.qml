@@ -38,7 +38,7 @@ Page {
     onStatusChanged: {
         Mysettings.loadSettings()
         gpsUpdateIdleLeft = gpsUpdateIdle
-        console.log("status", gpsUpdateIdle, gpsUpdateIdleLeft)
+        //console.log("status", gpsUpdateIdle, gpsUpdateIdleLeft)
         Mytables.loadImages()
     }
 
@@ -89,7 +89,6 @@ Page {
                             anchors.fill: parent
                             enabled: editIcon.editPossible
                             onClicked: {
-                                //console.log("im width", patchedImage.width, patchedImage.height)
                                 currentIndex = index
                                 addMode = false
                                 pageStack.push(Qt.resolvedUrl("AddImage.qml"))
@@ -139,7 +138,6 @@ Page {
         interval: 60000
         onTriggered: {
             gpsUpdateIdleLeft = gpsUpdateIdleLeft - 1
-            console.log("idleleft", gpsUpdateIdleLeft)
         }
     }
 
@@ -217,7 +215,6 @@ Page {
             currentLat = map.center.latitude
             currentLong = map.center.longitude
             pageStack.push(Qt.resolvedUrl("AddImage.qml"))
-            //console.log(map.zoomLevel)
         }
     }
 
