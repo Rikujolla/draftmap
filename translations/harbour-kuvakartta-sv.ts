@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="sv" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="sv">
 <context>
     <name>About</name>
     <message>
@@ -185,8 +187,13 @@
         <translation>Ange sökvägen till dina bildfiler här.</translation>
     </message>
     <message>
-        <source>Update GPS when app is not active </source>
-        <translation>Uppdatera GPS när appen inte är aktiv </translation>
+        <source>min</source>
+        <extracomment>Time in minutes</extracomment>
+        <translation>min</translation>
+    </message>
+    <message>
+        <source>Keep GPS on when the app is idle</source>
+        <translation>Låt GPS vara på när appen är i vänteläge</translation>
     </message>
 </context>
 </TS>

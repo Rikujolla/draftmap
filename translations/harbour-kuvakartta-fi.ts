@@ -1,4 +1,6 @@
-<?xml version="1.0" ?><!DOCTYPE TS><TS language="fi" version="2.1">
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE TS>
+<TS version="2.1" language="fi">
 <context>
     <name>About</name>
     <message>
@@ -185,8 +187,13 @@
         <translation>Syötä tähän kuvatiedostojesi kansion polku.</translation>
     </message>
     <message>
-        <source>Update GPS when app is not active </source>
-        <translation>Päivitä GPS-tietoja, vaikka sovellus ei ole aktiivinen</translation>
+        <source>min</source>
+        <extracomment>Time in minutes</extracomment>
+        <translation>min</translation>
+    </message>
+    <message>
+        <source>Keep GPS on when the app is idle</source>
+        <translation>Päivitä GPS:ää vaikka sovellus ei ole aktiivinen</translation>
     </message>
 </context>
 </TS>

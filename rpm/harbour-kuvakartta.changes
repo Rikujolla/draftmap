@@ -8,6 +8,14 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Wed May 03 2017 Riku Lahtinen <rikul.lajolla@kiu.as> 0.0.6-1
+- Adjusted GPS idle settings
+- Translation files added correctly to rpm
+
+* Wed May 03 2017 Riku Lahtinen <rikul.lajolla@kiu.as> 0.0.5-1
+- Swedish translation
+- Icon colors changed
+
 * Mon May 01 2017 Riku Lahtinen <rikul.lajolla@kiu.as> 0.0.4-1
 - Installaton fixes (Requires QtLocation, QtPositioning and Geoservices)
 

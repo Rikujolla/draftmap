@@ -187,7 +187,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Update GPS when app is not active </source>
+        <source>min</source>
+        <extracomment>Time in minutes</extracomment>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Keep GPS on when the app is idle</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

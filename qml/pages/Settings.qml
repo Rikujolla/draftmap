@@ -61,6 +61,7 @@ Page {
 
             SectionHeader { text: qsTr("GPS settings") }
 
+            /*
             TextSwitch {
                 text: qsTr("Update GPS when app is not active ")
                 visible : true
@@ -70,12 +71,42 @@ Page {
                     Mysettings.saveSettings()
                 }
             }
+            */
 
             Text {
                 font.pixelSize: Theme.fontSizeSmall
                 color: Theme.primaryColor
                 wrapMode: Text.WordWrap
+                width: parent.width*0.9
+                anchors {
+                    left: parent.left
+                    right: parent.right
+                    margins: Theme.paddingLarge
+                }
+                text: {qsTr("Keep GPS on when the app is idle")
+                }
+            }
+
+            Slider {
                 width: parent.width
+                minimumValue: 0
+                maximumValue: 15
+                stepSize: 1
+                value: gpsUpdateIdle
+                //: Time in minutes
+                valueText: value + " " + qsTr("min")
+                onValueChanged: {
+                    gpsUpdateIdle = value
+                    //value > 0 ? useLocation = true : useLocation = false
+                    Mysettings.saveSettings()
+                }
+            }
+
+            Text {
+                font.pixelSize: Theme.fontSizeSmall
+                color: Theme.primaryColor
+                wrapMode: Text.WordWrap
+                width: parent.width*0.9
                 anchors {
                     left: parent.left
                     right: parent.right

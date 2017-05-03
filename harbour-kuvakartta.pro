@@ -33,7 +33,9 @@ CONFIG += sailfishapp_i18n
 # planning to localize your app, remember to comment out the
 # following TRANSLATIONS line. And also do not forget to
 # modify the localized app name in the the .desktop file.
-TRANSLATIONS += translations/harbour-kuvakartta-de.ts
+TRANSLATIONS += translations/harbour-kuvakartta-de.ts \
+    translations/harbour-kuvakartta-fi.ts \
+    translations/harbour-kuvakartta-sv.ts
 
 DISTFILES += \
     qml/pages/MapPage.qml \
@@ -43,5 +45,4 @@ DISTFILES += \
     qml/pages/Settings.qml \
     qml/pages/Help.qml \
     qml/pages/About.qml \
-    rpm/harbour-kuvakartta.changes \
-    translations/harbour-kuvakartta-sv.ts
+    rpm/harbour-kuvakartta.changes

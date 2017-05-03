@@ -37,6 +37,8 @@ Page {
     id: page
     onStatusChanged: {
         Mysettings.loadSettings()
+        gpsUpdateIdleLeft = gpsUpdateIdle
+        console.log("status", gpsUpdateIdle, gpsUpdateIdleLeft)
         Mytables.loadImages()
     }
 
@@ -117,16 +119,28 @@ Page {
 
             PositionSource {
                 id:possut
-                active:useLocation && (Qt.application.active || gpsUpdateIdle)
+                active:useLocation && (Qt.application.active || gpsUpdateIdleLeft > 0)
                 updateInterval:gpsUpdateRate
                 onPositionChanged: {
                     gpsLat = possut.position.coordinate.latitude
                     gpsLong = possut.position.coordinate.longitude
                     trackLine.addCoordinate(QtPositioning.coordinate(gpsLat, gpsLong))
+                    Qt.application.active ? gpsUpdateIdleLeft = gpsUpdateIdle : ""
                 }
             }
         }
 
+    }
+
+    Timer
+    {
+        running: gpsUpdateIdleLeft > 0
+        repeat:true
+        interval: 60000
+        onTriggered: {
+            gpsUpdateIdleLeft = gpsUpdateIdleLeft - 1
+            console.log("idleleft", gpsUpdateIdleLeft)
+        }
     }
 
 
