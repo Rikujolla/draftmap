@@ -54,6 +54,7 @@ ApplicationWindow
     property int dbVersion:2 //
     property bool showHelptxt : true //
     property bool iconsVisible : true
+    property int noteFontSize : 16 // Default font size for notes on the map
 
     ListModel {
         id: imageInfo
@@ -71,7 +72,8 @@ ApplicationWindow
         }
         ListElement {
             title: "Test 2018"
-            sourceim:"img_01_lay01.png"
+            sourceim:"grid.png"
+            //sourceim:"img_01_lay01.png"
             latti:62.7572
             longi:25.7628
             stackheight: 20
@@ -83,7 +85,8 @@ ApplicationWindow
         }
         ListElement {
             title: "Test 2018"
-            sourceim:"img_01_lay01.svg"
+            //sourceim:"img_01_lay01.svg"
+            sourceim:"grid.png"
             latti:62.7572
             longi:25.7628
             stackheight: 30
@@ -95,7 +98,19 @@ ApplicationWindow
         }
     }
 
-
+    ListModel {
+        id:notesInfo
+        ListElement {
+            title: "Test 2017"
+            noteTitle:"Note title"
+            note: "My note here"
+            latti:62.3695273
+            longi:25.70485293
+            stackheight: 100
+            fonnt: 16
+            opacit:1.0
+        }
+    }
 
     Component.onCompleted: {
         //Mysettings.loadSettings()

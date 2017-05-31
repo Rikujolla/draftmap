@@ -39,33 +39,31 @@ Page {
         // PullDownMenu and PushUpMenu must be declared in SilicaFlickable, SilicaListView or SilicaGridView
         PullDownMenu {
             MenuItem {
-                text: qsTr("Delete image")
-                enabled: !addMode
+                text: qsTr("Delete a note")
+                //enabled: !addMode
                 onClicked: {
                     remorse.execute(qsTr("Deleting"), console.log("remorse") , 3000 )
                 }
                 RemorsePopup { id: remorse
                     onTriggered: {
-                        Mytables.deleteImage(currentIndex)
+                        Mytables.deleteNote(currentIndex)
                         pageStack.pop()
                     }
                 }
             }
             MenuItem {
-                text: qsTr("Add image")
-                enabled: !tiitle.errorHighlight && !neimi.errorHighlight && !layer.errorHighlight && !latti.errorHighlight && !longi.errorHighlight && !zoomi.errorHighlight && !rotatio.errorHighlight && !opasiit.errorHighlight
+                text: qsTr("Add a note")
+                enabled: !tiitle.errorHighlight && !note.errorHighlight && !layer.errorHighlight && !latti.errorHighlight && !longi.errorHighlight && !fonnt.errorHighlight && !opasiit.errorHighlight
                 onClicked: {
                     latti.reNu = latti.text;
                     longi.reNu = longi.text;
                     layer.reNu = layer.text;
-                    zoomi.reNu = zoomi.text;
-                    rotatio.reNu = rotatio.text;
+                    fonnt.reNu = fonnt.text;
+                    noteFontSize = fonnt.reNu;
                     opasiit.reNu = opasiit.text;
-                    widthscale.reNu = widthscale.text;
-                    heightscale.reNu = heightscale.text;
-                    //imageInfo.append({"title":tiitle.text, "sourceim":neimi.text, "latti":latti.reNu, "longi":longi.reNu, "stackheight":layer.reNu, "zlevel":zoomi.reNu, "rotat":rotatio.reNu, "opacit":opasiit.reNu})
-                    imageInfo.append({"title":tiitle.text, "sourceim":neimi.text, "latti":latti.reNu, "longi":longi.reNu, "stackheight":layer.reNu, "zlevel":zoomi.reNu, "rotat":rotatio.reNu, "opacit":opasiit.reNu, "widthscale":widthscale.reNu, "heightscale":heightscale.reNu})
-                    Mytables.addEditImage(currentIndex)
+                    notesInfo.append({"title":tiitle.text, "noteTitle":noteTitle.text, "note":note.text, "latti":latti.reNu, "longi":longi.reNu, "stackheight":layer.reNu, "fonnt":fonnt.reNu, "opacit":opasiit.reNu})
+                    Mytables.addEditNote(currentIndex);
+                    Mysettings.saveSettings();
                 }
             }
             MenuItem {
@@ -85,11 +83,11 @@ Page {
             width: page.width
             spacing: Theme.paddingMedium
             PageHeader {
-                title: qsTr("Add or edit image")
+                title: qsTr("Add or edit a note")
             }
 
             Text {
-                text: qsTr("Project name is used to be able to manage multiple images related to same topic. A combination of project name and file name has to be unique. When editing values enter key has to be pressed to make confirm the changes")
+                text: qsTr("Layer, latitude and longitude combination has to be unique. If the same combination is added the old info is substituted.")
                 width: page.width*0.9
                 wrapMode: Text.WordWrap
                 visible: showHelptxt
@@ -110,7 +108,7 @@ Page {
                 TextField {
                     id: tiitle
                     width: page.width/2
-                    text: currentIndex > imageInfo.count-1 ? "" : imageInfo.get(currentIndex).title
+                    text: currentIndex > notesInfo.count-1 ? "" : notesInfo.get(currentIndex).title
                     validator: RegExpValidator { regExp: /^\S*$/}
                     color: errorHighlight? "red" : Theme.primaryColor
                     inputMethodHints: Qt.ImhNoPredictiveText
@@ -118,9 +116,9 @@ Page {
                     EnterKey.iconSource: "image://theme/icon-m-enter-close"
                     EnterKey.onClicked: {
                         focus = false
-                        if (!addMode) {
-                            imageInfo.setProperty(currentIndex,"title",text)
-                            Mytables.addEditImage(currentIndex)
+                        if (currentIndex < notesInfo.count) { // If editing note, the changes are saved immediately
+                            notesInfo.setProperty(currentIndex,"title",text)
+                            Mytables.addEditNote(currentIndex)
                         }
                     }
                 }
@@ -129,35 +127,59 @@ Page {
             Row {
                 x: Theme.paddingLarge
                 spacing: Theme.paddingMedium
-
                 Text {
-                    text: qsTr("File name")
+                    text: qsTr("Note title")
                     color: Theme.secondaryHighlightColor
                     x: Theme.paddingLarge
                     width:page.width/3
                     wrapMode: Text.WordWrap
                 }
-
                 TextField {
-                    id: neimi
-                    placeholderText: "img.svg"
-                    text: currentIndex > imageInfo.count-1 ? "" : imageInfo.get(currentIndex).sourceim
+                    id: noteTitle
                     width: page.width/2
-                    //wrapMode:Text.WordWrap
-                    validator: RegExpValidator { regExp: /^[^*&%\s]+$/}
+                    text: currentIndex > notesInfo.count-1 ? "" : notesInfo.get(currentIndex).noteTitle
+                    validator: RegExpValidator { regExp: /^\S*$/}
                     color: errorHighlight? "red" : Theme.primaryColor
                     inputMethodHints: Qt.ImhNoPredictiveText
                     EnterKey.enabled: !errorHighlight
                     EnterKey.iconSource: "image://theme/icon-m-enter-close"
                     EnterKey.onClicked: {
                         focus = false
-                        if (!addMode) {
-                            imageInfo.setProperty(currentIndex,"sourceim",text)
-                            Mytables.addEditImage(currentIndex)
+                        if (currentIndex < notesInfo.count) { // If editing note, the changes are saved immediately
+                            notesInfo.setProperty(currentIndex,"noteTitle",text)
+                            Mytables.addEditNote(currentIndex)
                         }
                     }
                 }
             }
+
+            Text {
+                    text: qsTr("Note")
+                    color: Theme.secondaryHighlightColor
+                    x: Theme.paddingLarge
+                    width:page.width/3
+                    wrapMode: Text.WordWrap
+                }
+
+                TextArea {
+                    id: note
+                    placeholderText: qsTr("My note")
+                    text: currentIndex > notesInfo.count-1 ? "" : notesInfo.get(currentIndex).note
+                    width: page.width
+                    wrapMode:Text.WordWrap
+                    //validator: RegExpValidator { regExp: /^[^*&%\s]+$/}
+                    color: errorHighlight? "red" : Theme.primaryColor
+                    inputMethodHints: Qt.ImhNoPredictiveText
+                    EnterKey.enabled: !errorHighlight
+                    EnterKey.iconSource: "image://theme/icon-m-enter-close"
+                    EnterKey.onClicked: {
+                        focus = false
+                        if (currentIndex < notesInfo.count) {
+                            notesInfo.setProperty(currentIndex,"note",text)
+                            Mytables.addEditNote(currentIndex)
+                        }
+                    }
+                }
 
             Row {
                 x: Theme.paddingLarge
@@ -175,7 +197,7 @@ Page {
                     property int reNu
                     id: layer
                     placeholderText: "1"
-                    text: currentIndex > imageInfo.count-1 ? 10 : imageInfo.get(currentIndex).stackheight
+                    text: currentIndex > notesInfo.count-1 ? 100 : notesInfo.get(currentIndex).stackheight
                     width: page.width/2
                     validator: RegExpValidator { regExp: /^\d{1,100}$/ }
                     color: errorHighlight? "red" : Theme.primaryColor
@@ -185,9 +207,9 @@ Page {
                     EnterKey.onClicked: {
                         focus = false
                         reNu = text
-                        if (!addMode) {
-                            imageInfo.setProperty(currentIndex,"stackheight",reNu)
-                            Mytables.addEditImage(currentIndex)
+                        if (currentIndex < notesInfo.count) {
+                            notesInfo.setProperty(currentIndex,"stackheight",reNu)
+                            Mytables.addEditNote(currentIndex)
                         }
                     }
                 }
@@ -207,8 +229,8 @@ Page {
                     property real reNu
                     id: latti
                     placeholderText: "63.1"
-                    text: currentIndex > imageInfo.count-1 ? currentLat : imageInfo.get(currentIndex).latti
-                    //text: currentIndex > imageInfo.count-1 ? "" : imageInfo.get(currentIndex).latti
+                    text: currentIndex > notesInfo.count-1 ? currentLat : notesInfo.get(currentIndex).latti
+                    //text: currentIndex > notesInfo.count-1 ? "" : notesInfo.get(currentIndex).latti
                     width: page.width/2
                     validator: RegExpValidator { regExp: /^\-?\d?\d\.\d*$/ }
                     color: errorHighlight? "red" : Theme.primaryColor
@@ -218,9 +240,9 @@ Page {
                     EnterKey.onClicked: {
                         focus = false
                         reNu = text;
-                        if (!addMode) {
-                            imageInfo.setProperty(currentIndex,"latti",reNu)
-                            Mytables.addEditImage(currentIndex)
+                        if (currentIndex < notesInfo.count) {
+                            notesInfo.setProperty(currentIndex,"latti",reNu)
+                            Mytables.addEditNote(currentIndex)
                         }
                     }
                 }
@@ -240,8 +262,8 @@ Page {
                     property real reNu
                     id: longi
                     placeholderText: "27.9"
-                    //text: currentIndex > imageInfo.count-1 ? "" : imageInfo.get(currentIndex).longi
-                    text: currentIndex > imageInfo.count-1 ? currentLong : imageInfo.get(currentIndex).longi
+                    //text: currentIndex > notesInfo.count-1 ? "" : notesInfo.get(currentIndex).longi
+                    text: currentIndex > notesInfo.count-1 ? currentLong : notesInfo.get(currentIndex).longi
                     width: page.width/2
                     validator: RegExpValidator { regExp: /^\-?\d?\d?\d\.\d*$/ }
                     color: errorHighlight? "red" : Theme.primaryColor
@@ -251,10 +273,27 @@ Page {
                     EnterKey.onClicked: {
                         focus = false
                         reNu = text;
-                        if (!addMode) {
-                            imageInfo.setProperty(currentIndex,"longi",reNu)
-                            Mytables.addEditImage(currentIndex)
+                        if (currentIndex < notesInfo.count) {
+                            notesInfo.setProperty(currentIndex,"longi",reNu)
+                            Mytables.addEditNote(currentIndex)
                         }
+                    }
+                }
+            }
+
+            Button {
+                text: qsTr("Current location")
+                anchors.horizontalCenter: parent.horizontalCenter
+                enabled:useLocation
+                onClicked: {
+                    latti.text = gpsLat;
+                    latti.reNu = latti.text;
+                    longi.text = gpsLong;
+                    longi.reNu = longi.text;
+                    if (currentIndex < notesInfo.count) {
+                        notesInfo.setProperty(currentIndex,"latti",latti.reNu);
+                        notesInfo.setProperty(currentIndex,"longi",longi.reNu)
+                        Mytables.addEditNote(currentIndex)
                     }
                 }
             }
@@ -263,7 +302,7 @@ Page {
                 x: Theme.paddingLarge
                 spacing: Theme.paddingMedium
                 Text {
-                    text: qsTr("Zoom level")
+                    text: qsTr("Font size")
                     color: Theme.secondaryHighlightColor
                     x: Theme.paddingLarge
                     width: page.width/3
@@ -271,11 +310,11 @@ Page {
 
                 TextField {
                     property real reNu
-                    id: zoomi
-                    placeholderText: "16.0"
-                    text: currentIndex > imageInfo.count-1 ? 16.5 : imageInfo.get(currentIndex).zlevel
+                    id: fonnt
+                    placeholderText: "24"
+                    text: currentIndex > notesInfo.count-1 ? noteFontSize : notesInfo.get(currentIndex).fonnt
                     width: page.width/2
-                    validator: RegExpValidator { regExp: /^\-?\d?\d?\d\.\d*$/ }
+                    validator: RegExpValidator { regExp: /^[1-9]\d?\d?\d?$/ }
                     color: errorHighlight? "red" : Theme.primaryColor
                     inputMethodHints: Qt.ImhNoPredictiveText
                     EnterKey.enabled: !errorHighlight
@@ -283,47 +322,15 @@ Page {
                     EnterKey.onClicked: {
                         focus = false
                         reNu = text;
-                        if (!addMode) {
-                            imageInfo.setProperty(currentIndex,"zlevel",reNu)
-                            Mytables.addEditImage(currentIndex)
+                        if (currentIndex < notesInfo.count) {
+                            notesInfo.setProperty(currentIndex,"fonnt",reNu)
+                            Mytables.addEditNote(currentIndex)
+                            Mysettings.saveSettings();
                         }
                     }
                 }
             }
 
-            Row {
-                x: Theme.paddingLarge
-                spacing: Theme.paddingMedium
-                Text {
-                    text: qsTr("Rotation")
-                    color: Theme.secondaryHighlightColor
-                    x: Theme.paddingLarge
-                    width: page.width/3
-                }
-
-                TextField {
-                    property real reNu
-                    id: rotatio
-                    placeholderText: "2.0"
-                    text: currentIndex > imageInfo.count-1 ? 0 : imageInfo.get(currentIndex).rotat
-                    width: page.width/2
-                    validator: RegExpValidator { regExp: /^(\-?\d?\d?\d\.\d*)|(\-?\d*)$/ }
-                    color: errorHighlight? "red" : Theme.primaryColor
-                    inputMethodHints: Qt.ImhNoPredictiveText
-                    EnterKey.enabled: !errorHighlight
-                    EnterKey.iconSource: "image://theme/icon-m-enter-close"
-                    EnterKey.onClicked: {
-                        focus = false
-                        reNu = text;
-                        //console.log("addMode", addMode, currentIndex)
-                        if (!addMode) {
-                            imageInfo.setProperty(currentIndex,"rotat",reNu)
-                            Mytables.addEditImage(currentIndex)
-                        }
-
-                    }
-                }
-            }
 
             Row {
                 x: Theme.paddingLarge
@@ -339,7 +346,7 @@ Page {
                     property real reNu
                     id: opasiit
                     placeholderText: "1.0"
-                    text: currentIndex > imageInfo.count-1 ? 1.0 : imageInfo.get(currentIndex).opacit
+                    text: currentIndex > notesInfo.count-1 ? 1 : notesInfo.get(currentIndex).opacit
                     width: page.width/2
                     //validator: RegExpValidator { regExp: /^(\d\.\d*)|(1)|(0)$/ }
                     validator: RegExpValidator { regExp: /^(0)(\.\d*)|(1)|(0)$/ }
@@ -350,81 +357,15 @@ Page {
                     EnterKey.onClicked: {
                         focus = false
                         reNu = text;
-                        if (!addMode) {
-                            imageInfo.setProperty(currentIndex,"opacit",reNu)
-                            Mytables.addEditImage(currentIndex)
+                        if (currentIndex < notesInfo.count) {
+                            notesInfo.setProperty(currentIndex,"opacit",reNu)
+                            Mytables.addEditNote(currentIndex)
                         }
                     }
                 }
             }
 
-            Row {
-                x: Theme.paddingLarge
-                spacing: Theme.paddingMedium
-                Text {
-                    text: qsTr("Width scale")
-                    color: Theme.secondaryHighlightColor
-                    x: Theme.paddingLarge
-                    width: page.width/3
-                }
 
-                TextField {
-                    property real reNu
-                    id: widthscale
-                    placeholderText: "1.0"
-                    text: currentIndex > imageInfo.count-1 ? 1.0 : imageInfo.get(currentIndex).widthscale
-                    width: page.width/2
-                    validator: RegExpValidator { regExp: /^(\-?\d?\d?\d\.\d*)|(\-?\d*)$/ }
-                    color: errorHighlight? "red" : Theme.primaryColor
-                    inputMethodHints: Qt.ImhNoPredictiveText
-                    EnterKey.enabled: !errorHighlight
-                    EnterKey.iconSource: "image://theme/icon-m-enter-close"
-                    EnterKey.onClicked: {
-                        focus = false
-                        reNu = text;
-                        //console.log("addMode", addMode, currentIndex)
-                        if (!addMode) {
-                            imageInfo.setProperty(currentIndex,"widthscale",reNu)
-                            Mytables.addEditImage(currentIndex)
-                        }
-
-                    }
-                }
-            }
-
-            Row {
-                x: Theme.paddingLarge
-                spacing: Theme.paddingMedium
-                Text {
-                    text: qsTr("Height scale")
-                    color: Theme.secondaryHighlightColor
-                    x: Theme.paddingLarge
-                    width: page.width/3
-                }
-
-                TextField {
-                    property real reNu
-                    id: heightscale
-                    placeholderText: "1.0"
-                    text: currentIndex > imageInfo.count-1 ? 1.0 : imageInfo.get(currentIndex).heightscale
-                    width: page.width/2
-                    validator: RegExpValidator { regExp: /^(\-?\d?\d?\d\.\d*)|(\-?\d*)$/ }
-                    color: errorHighlight? "red" : Theme.primaryColor
-                    inputMethodHints: Qt.ImhNoPredictiveText
-                    EnterKey.enabled: !errorHighlight
-                    EnterKey.iconSource: "image://theme/icon-m-enter-close"
-                    EnterKey.onClicked: {
-                        focus = false
-                        reNu = text;
-                        //console.log("addMode", addMode, currentIndex)
-                        if (!addMode) {
-                            imageInfo.setProperty(currentIndex,"heightscale",reNu)
-                            Mytables.addEditImage(currentIndex)
-                        }
-
-                    }
-                }
-            }
 
             Component.onCompleted: {
 

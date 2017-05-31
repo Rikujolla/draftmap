@@ -39,7 +39,8 @@ Page {
         Mysettings.loadSettings()
         gpsUpdateIdleLeft = gpsUpdateIdle
         //console.log("status", gpsUpdateIdle, gpsUpdateIdleLeft)
-        Mytables.loadImages()
+        Mytables.loadImages();
+        Mytables.loadNotes();
     }
 
     Location {
@@ -108,6 +109,32 @@ Page {
                 }
             }
 
+            /*MapCircle {
+                //id: lamDirOne
+                color: "red"
+                border.color: Qt.darker(color);
+                border.width: 3
+                radius:20.0
+                opacity: 1.0
+                z:40
+                center: QtPositioning.coordinate(gpsLat,gpsLong)
+            }*/
+
+            MapQuickItem {
+                //id: marker
+                anchorPoint.x: image.width/2
+                anchorPoint.y: image.height/2
+                coordinate: QtPositioning.coordinate(gpsLat,gpsLong)
+
+                sourceItem: Image {
+                    id: image
+                    height: Screen.width/22
+                    width: Screen.width/22
+                    source: "./components/red.png"
+                }
+            }
+
+
             MapPolyline {
                 id:trackLine
                 line.width: 5
@@ -115,6 +142,44 @@ Page {
                 z:60
                 path: []
             }
+
+            /// Notes section
+
+            MapItemView {
+                id:notes
+                model:notesInfo
+                delegate: notesComponent
+            }
+
+            Component {
+                id: notesComponent
+
+                MapQuickItem {
+                    //id:notesTex
+                    sourceItem: Text{
+                        text: noteTitle
+                        color:"black"
+                        font.bold: true
+                        //font.pixelSize: Theme.fontSizeLarge
+                        font.pixelSize: fonnt
+                        MouseArea {
+                            anchors.fill: parent
+                            //enabled: editIcon.editPossible
+                            onClicked: {
+                                currentIndex = index
+                                //addMode = false
+                                pageStack.push(Qt.resolvedUrl("AddNote.qml"))
+                            }
+                        }
+
+                    }
+                    zoomLevel: 13.0
+                    z:80
+                    coordinate: QtPositioning.coordinate(latti,longi)
+                    //anchorPoint: Qt.point(velTex.sourceItem.width * 0.5,velTex.sourceItem.height * 0.5)
+                }
+            }
+
 
             PositionSource {
                 id:possut
@@ -129,7 +194,12 @@ Page {
             }
         }
 
+
     }
+
+
+
+
 
     Timer
     {
@@ -148,6 +218,20 @@ Page {
         anchors.bottom : page.bottom
         onLinkActivated: Qt.openUrlExternally(link)
     }
+
+
+
+    Image {
+        anchors.verticalCenter: rect.verticalCenter
+        anchors.horizontalCenter: rect.horizontalCenter
+        height: Screen.width/20
+        width: Screen.width/20
+        source: "./components/center.png"
+    }
+
+
+
+
 
     ////////////////////////////
     /// Icons Section
@@ -179,16 +263,28 @@ Page {
         }
     }
 
+    IconButton {
+        id:addNote
+        anchors.bottom: gpsIcon.top
+        anchors.right: page.right
+        icon.source: "image://theme/icon-m-note?" + "black"
+        onClicked: {
+            currentIndex = notesInfo.count;
+            currentLat = map.center.latitude
+            currentLong = map.center.longitude
+            pageStack.push(Qt.resolvedUrl("AddNote.qml"))
+
+        }
+    }
 
     IconButton {
         id: settingsIcon
         visible: iconsVisible
-        anchors.bottom: gpsIcon.top
+        anchors.bottom: addNote.top
         anchors.right: page.right
         icon.source: "image://theme/icon-m-developer-mode?" + "black"
         onClicked: {
             pageStack.push(Qt.resolvedUrl("Settings.qml"))
-
         }
     }
 

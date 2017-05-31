@@ -56,3 +56,52 @@ function deleteImage(j) {
                 }
                 )
 }
+
+///////// Notes section
+
+function loadNotes() {
+
+    var db = LocalStorage.openDatabaseSync("DraftmapDB", "1.0", "Draft map database", 1000000);
+
+    db.transaction(
+                function(tx) {
+                    tx.executeSql('CREATE TABLE IF NOT EXISTS Notes (title TEXT, noteTitle TEXT, note TEXT, latti REAL, longi REAL, stackheight INTEGER, fonnt INTEGER, opacit REAL, UNIQUE(latti,longi,stackheight))');
+
+                    var rs = tx.executeSql('SELECT * FROM Notes')
+                    notesInfo.clear()
+
+                    for(var i = 0; i < rs.rows.length; i++) {
+                        notesInfo.append({"title":rs.rows.item(i).title, "noteTitle":rs.rows.item(i).noteTitle, "note":rs.rows.item(i).note, "latti":rs.rows.item(i).latti, "longi":rs.rows.item(i).longi, "stackheight":rs.rows.item(i).stackheight, "fonnt":rs.rows.item(i).fonnt, "opacit":rs.rows.item(i).opacit})
+                    }
+                }
+                )
+}
+
+
+/// The function adds an image to database
+function addEditNote(j) {
+
+    var db = LocalStorage.openDatabaseSync("DraftmapDB", "1.0", "Draft map database", 1000000);
+
+    db.transaction(
+                function(tx) {
+                    // Create the table, if not existing
+                    tx.executeSql('CREATE TABLE IF NOT EXISTS Notes (title TEXT, noteTitle TEXT, note TEXT, latti REAL, longi REAL, stackheight INTEGER, fonnt INTEGER, opacit REAL, UNIQUE(latti,longi,stackheight))');
+                    tx.executeSql('INSERT OR REPLACE INTO Notes VALUES (?,?,?,?,?,?,?,?)', [notesInfo.get(j).title, notesInfo.get(j).noteTitle, notesInfo.get(j).note, notesInfo.get(j).latti, notesInfo.get(j).longi, notesInfo.get(j).stackheight, notesInfo.get(j).fonnt, notesInfo.get(j).opacit])
+                }
+                )
+}
+
+/// The function deletes a note from the database
+function deleteNote(j) {
+
+    var db = LocalStorage.openDatabaseSync("DraftmapDB", "1.0", "Draft map database", 1000000);
+
+    db.transaction(
+                function(tx) {
+                    // Create the table, if not existing
+                    tx.executeSql('CREATE TABLE IF NOT EXISTS Notes (title TEXT, noteTitle TEXT, note TEXT, latti REAL, longi REAL, stackheight INTEGER, fonnt INTEGER, opacit REAL, UNIQUE(latti,longi,stackheight))');
+                    tx.executeSql('DELETE FROM Notes WHERE latti=? AND longi=? AND stackheight=?', [notesInfo.get(j).latti, notesInfo.get(j).longi, notesInfo.get(j).stackheight]);
+                }
+                )
+}

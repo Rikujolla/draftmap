@@ -35,6 +35,10 @@
                 rs = tx.executeSql('SELECT * FROM Settings WHERE name = ?', 'iconsVisible');
                 if (rs.rows.length > 0) {tx.executeSql('UPDATE Settings SET valint=? WHERE name=?', [iconsVisible, 'iconsVisible'])}
                 else {tx.executeSql('INSERT INTO Settings VALUES(?, ?, ?, ?, ?)', [ 'iconsVisible', '', '', '', iconsVisible ])}
+                // noteFontSize
+                rs = tx.executeSql('SELECT * FROM Settings WHERE name = ?', 'noteFontSize');
+                if (rs.rows.length > 0) {tx.executeSql('UPDATE Settings SET valint=? WHERE name=?', [noteFontSize, 'noteFontSize'])}
+                else {tx.executeSql('INSERT INTO Settings VALUES(?, ?, ?, ?, ?)', [ 'noteFontSize', '', '', '', noteFontSize ])}
             }
         )
     }
@@ -75,6 +79,10 @@ function loadSettings() {
             // iconsVisible
             rs = tx.executeSql('SELECT * FROM Settings WHERE name = ?', 'iconsVisible');
             if (rs.rows.length > 0) {iconsVisible = rs.rows.item(0).valint}
+            else {}
+            // noteFontSize
+            rs = tx.executeSql('SELECT * FROM Settings WHERE name = ?', 'noteFontSize');
+            if (rs.rows.length > 0) {noteFontSize = rs.rows.item(0).valint}
             else {}
         }
 

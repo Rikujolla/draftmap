@@ -116,6 +116,73 @@
     </message>
 </context>
 <context>
+    <name>AddNote</name>
+    <message>
+        <source>Deleting</source>
+        <translation type="unfinished">Tar bort</translation>
+    </message>
+    <message>
+        <source>Show/hide help texts</source>
+        <translation type="unfinished">Visa/Dölj hjälptexter</translation>
+    </message>
+    <message>
+        <source>Add or edit a note</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Note</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Layer</source>
+        <translation type="unfinished">Lager</translation>
+    </message>
+    <message>
+        <source>Latitude</source>
+        <translation type="unfinished">Latitud</translation>
+    </message>
+    <message>
+        <source>Longitude</source>
+        <translation type="unfinished">Longitud</translation>
+    </message>
+    <message>
+        <source>Opacity</source>
+        <translation type="unfinished">Opacitet</translation>
+    </message>
+    <message>
+        <source>Delete a note</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Layer, latitude and longitude combination has to be unique. If the same combination is added the old info is substituted.</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Font size</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add a note</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Note title</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>My note</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Current location</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Project</source>
+        <translation type="unfinished">Projekt</translation>
+    </message>
+</context>
+<context>
     <name>CoverPage</name>
     <message>
         <source>Draft map</source>

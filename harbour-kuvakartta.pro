@@ -45,4 +45,6 @@ DISTFILES += \
     qml/pages/Settings.qml \
     qml/pages/Help.qml \
     qml/pages/About.qml \
-    rpm/harbour-kuvakartta.changes
+    rpm/harbour-kuvakartta.changes \
+    qml/pages/AddNote.qml \
+    qml/pages/components/center.png
