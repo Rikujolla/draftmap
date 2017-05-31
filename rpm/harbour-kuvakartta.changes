@@ -8,6 +8,10 @@
 # * date Author's Name <author's email> version-release
 # - Summary of changes
 
+* Wed May 31 2017 Riku Lahtinen <rikul.lajolla@kiu.as> 0.0.7-1
+- Added a possibility to add notes on the map
+- Added a map center circle on the map
+
 * Wed May 03 2017 Riku Lahtinen <rikul.lajolla@kiu.as> 0.0.6-1
 - Adjusted GPS idle settings
 - Translation files added correctly to rpm
