@@ -126,10 +126,6 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Add or edit a note</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Note</source>
         <translation type="unfinished"></translation>
     </message>
@@ -179,6 +175,10 @@
     </message>
     <message>
         <source>Project</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Edit a note</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

@@ -119,67 +119,67 @@
     <name>AddNote</name>
     <message>
         <source>Deleting</source>
-        <translation type="unfinished">Tar bort</translation>
+        <translation>Tar bort</translation>
     </message>
     <message>
         <source>Show/hide help texts</source>
-        <translation type="unfinished">Visa/Dölj hjälptexter</translation>
-    </message>
-    <message>
-        <source>Add or edit a note</source>
-        <translation type="unfinished"></translation>
+        <translation>Visa/Dölj hjälptexter</translation>
     </message>
     <message>
         <source>Note</source>
-        <translation type="unfinished"></translation>
+        <translation>Notis</translation>
     </message>
     <message>
         <source>Layer</source>
-        <translation type="unfinished">Lager</translation>
+        <translation>Lager</translation>
     </message>
     <message>
         <source>Latitude</source>
-        <translation type="unfinished">Latitud</translation>
+        <translation>Latitud</translation>
     </message>
     <message>
         <source>Longitude</source>
-        <translation type="unfinished">Longitud</translation>
+        <translation>Longitud</translation>
     </message>
     <message>
         <source>Opacity</source>
-        <translation type="unfinished">Opacitet</translation>
+        <translation>Opacitet</translation>
     </message>
     <message>
         <source>Delete a note</source>
-        <translation type="unfinished"></translation>
+        <translation>Ta bort en notis</translation>
     </message>
     <message>
         <source>Layer, latitude and longitude combination has to be unique. If the same combination is added the old info is substituted.</source>
-        <translation type="unfinished"></translation>
+        <translation>Lager-, latitud- och longitudkombination måste vara unik. Om samma kombination anges ersätts den gamla informationen.</translation>
     </message>
     <message>
         <source>Font size</source>
-        <translation type="unfinished"></translation>
+        <translation>Teckenstorlek</translation>
     </message>
     <message>
         <source>Add a note</source>
-        <translation type="unfinished"></translation>
+        <translation>Lägg till en notis</translation>
     </message>
     <message>
         <source>Note title</source>
-        <translation type="unfinished"></translation>
+        <translation>Notisnamn</translation>
     </message>
     <message>
         <source>My note</source>
-        <translation type="unfinished"></translation>
+        <translation>Min notis</translation>
     </message>
     <message>
         <source>Current location</source>
-        <translation type="unfinished"></translation>
+        <translation>Aktuell plats</translation>
     </message>
     <message>
         <source>Project</source>
-        <translation type="unfinished">Projekt</translation>
+        <translation>Projekt</translation>
+    </message>
+    <message>
+        <source>Edit a note</source>
+        <translation>Redigera en notis</translation>
     </message>
 </context>
 <context>

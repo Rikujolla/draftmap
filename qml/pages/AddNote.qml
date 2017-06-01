@@ -83,7 +83,7 @@ Page {
             width: page.width
             spacing: Theme.paddingMedium
             PageHeader {
-                title: qsTr("Add or edit a note")
+                title: currentIndex > notesInfo.count-1 ? qsTr("Add a note") : qsTr("Edit a note")
             }
 
             Text {
@@ -138,7 +138,7 @@ Page {
                     id: noteTitle
                     width: page.width/2
                     text: currentIndex > notesInfo.count-1 ? "" : notesInfo.get(currentIndex).noteTitle
-                    validator: RegExpValidator { regExp: /^\S*$/}
+                    validator: RegExpValidator { regExp: /^\S.*$/}
                     color: errorHighlight? "red" : Theme.primaryColor
                     inputMethodHints: Qt.ImhNoPredictiveText
                     EnterKey.enabled: !errorHighlight

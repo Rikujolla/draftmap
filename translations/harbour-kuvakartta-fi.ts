@@ -126,10 +126,6 @@
         <translation>Näytä/piilota ohjetekstit</translation>
     </message>
     <message>
-        <source>Add or edit a note</source>
-        <translation>Lisää tai muokkaa muistiinpanoa</translation>
-    </message>
-    <message>
         <source>Note</source>
         <translation>Muistiinpano</translation>
     </message>
@@ -180,6 +176,10 @@
     <message>
         <source>Project</source>
         <translation>Projekti</translation>
+    </message>
+    <message>
+        <source>Edit a note</source>
+        <translation>Muokkaa muistiinpanoa</translation>
     </message>
 </context>
 <context>
