@@ -55,6 +55,8 @@ ApplicationWindow
     property bool showHelptxt : true //
     property bool iconsVisible : true
     property int noteFontSize : 16 // Default font size for notes on the map
+    property string projectDefault : "Default" // Used to save project name
+    property bool locationBasedNote //
 
     ListModel {
         id: imageInfo

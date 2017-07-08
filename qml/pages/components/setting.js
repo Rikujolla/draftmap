@@ -39,6 +39,14 @@
                 rs = tx.executeSql('SELECT * FROM Settings WHERE name = ?', 'noteFontSize');
                 if (rs.rows.length > 0) {tx.executeSql('UPDATE Settings SET valint=? WHERE name=?', [noteFontSize, 'noteFontSize'])}
                 else {tx.executeSql('INSERT INTO Settings VALUES(?, ?, ?, ?, ?)', [ 'noteFontSize', '', '', '', noteFontSize ])}
+                // projectDefault
+                rs = tx.executeSql('SELECT * FROM Settings WHERE name = ?', 'projectDefault');
+                if (rs.rows.length > 0) {tx.executeSql('UPDATE Settings SET valte=? WHERE name=?', [projectDefault, 'projectDefault'])}
+                else {tx.executeSql('INSERT INTO Settings VALUES(?, ?, ?, ?, ?)', [ 'projectDefault', '', projectDefault, '', '' ])}
+                // locationBasedNote
+                rs = tx.executeSql('SELECT * FROM Settings WHERE name = ?', 'locationBasedNote');
+                if (rs.rows.length > 0) {tx.executeSql('UPDATE Settings SET valint=? WHERE name=?', [locationBasedNote, 'locationBasedNote'])}
+                else {tx.executeSql('INSERT INTO Settings VALUES(?, ?, ?, ?, ?)', [ 'locationBasedNote', '', '', '', locationBasedNote ])}
             }
         )
     }
@@ -83,6 +91,14 @@ function loadSettings() {
             // noteFontSize
             rs = tx.executeSql('SELECT * FROM Settings WHERE name = ?', 'noteFontSize');
             if (rs.rows.length > 0) {noteFontSize = rs.rows.item(0).valint}
+            else {}
+            // projectDefault
+            rs = tx.executeSql('SELECT * FROM Settings WHERE name = ?', 'projectDefault');
+            if (rs.rows.length > 0) {projectDefault = rs.rows.item(0).valte}
+            else {}
+            // locationBasedNote
+            rs = tx.executeSql('SELECT * FROM Settings WHERE name = ?', 'locationBasedNote');
+            if (rs.rows.length > 0) {locationBasedNote = rs.rows.item(0).valint}
             else {}
         }
 

@@ -7,6 +7,8 @@
 
 # * date Author's Name <author's email> version-release
 # - Summary of changes
+* Sat Jul 08 2017 Riku Lahtinen <rikul.lajolla@kiu.as> 0.0.8-1
+- Minor refinement to the note adding feature
 
 * Thu Jun 01 2017 Riku Lahtinen <rikul.lajolla@kiu.as> 0.0.7-1
 - Added a possibility to add notes on the map

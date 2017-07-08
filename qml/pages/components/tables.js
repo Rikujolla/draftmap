@@ -78,6 +78,20 @@ function loadNotes() {
 }
 
 
+/// This is used to update key values arguments, j lat long level
+function updateNote(j) {
+
+    var db = LocalStorage.openDatabaseSync("DraftmapDB", "1.0", "Draft map database", 1000000);
+
+    db.transaction(
+                function(tx) {
+                    // Create the table, if not existing
+                    tx.executeSql('CREATE TABLE IF NOT EXISTS Notes (title TEXT, noteTitle TEXT, note TEXT, latti REAL, longi REAL, stackheight INTEGER, fonnt INTEGER, opacit REAL, UNIQUE(latti,longi,stackheight))');
+                    tx.executeSql('UPDATE Notes SET latti = ? WHERE latti = ? AND longi = ? AND stackheight = ?', [notesInfo.get(j).latti, notesInfo.get(j).longi, notesInfo.get(j).stackheight])
+                }
+                )
+}
+
 /// The function adds an image to database
 function addEditNote(j) {
 

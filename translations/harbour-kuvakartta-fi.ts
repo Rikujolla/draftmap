@@ -170,16 +170,24 @@
         <translation>Muistiinpanoni</translation>
     </message>
     <message>
-        <source>Current location</source>
-        <translation>Nykyinen sijainti</translation>
-    </message>
-    <message>
         <source>Project</source>
         <translation>Projekti</translation>
     </message>
     <message>
         <source>Edit a note</source>
         <translation>Muokkaa muistiinpanoa</translation>
+    </message>
+    <message>
+        <source>Use the current location instead of the map center</source>
+        <translation>Käytä nykyistä sijaintia kartan keskipisteen asemesta.</translation>
+    </message>
+    <message>
+        <source>Current location</source>
+        <translation>Nykyinen sijainti</translation>
+    </message>
+    <message>
+        <source>Map center</source>
+        <translation>Kartan keskipiste</translation>
     </message>
 </context>
 <context>

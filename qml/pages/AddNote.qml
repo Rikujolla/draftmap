@@ -60,6 +60,7 @@ Page {
                     layer.reNu = layer.text;
                     fonnt.reNu = fonnt.text;
                     noteFontSize = fonnt.reNu;
+                    projectDefault = tiitle.text;
                     opasiit.reNu = opasiit.text;
                     notesInfo.append({"title":tiitle.text, "noteTitle":noteTitle.text, "note":note.text, "latti":latti.reNu, "longi":longi.reNu, "stackheight":layer.reNu, "fonnt":fonnt.reNu, "opacit":opasiit.reNu})
                     Mytables.addEditNote(currentIndex);
@@ -108,8 +109,8 @@ Page {
                 TextField {
                     id: tiitle
                     width: page.width/2
-                    text: currentIndex > notesInfo.count-1 ? "" : notesInfo.get(currentIndex).title
-                    validator: RegExpValidator { regExp: /^\S*$/}
+                    text: currentIndex > notesInfo.count-1 ? projectDefault : notesInfo.get(currentIndex).title
+                    validator: RegExpValidator { regExp: /^\S.*$/}
                     color: errorHighlight? "red" : Theme.primaryColor
                     inputMethodHints: Qt.ImhNoPredictiveText
                     EnterKey.enabled: !errorHighlight
@@ -281,16 +282,61 @@ Page {
                 }
             }
 
+            Timer
+            {
+                running: Qt.application.active && activeLocation.checked && currentIndex > notesInfo.count-1
+                repeat:true
+                interval: gpsUpdateRate/2
+                onTriggered: {
+                    console.log("test timer", gpsLat, gpsLong)
+                    latti.text = gpsLat;
+                    latti.reNu = latti.text;
+                    longi.text = gpsLong;
+                    longi.reNu = longi.text;
+                }
+            }
+
+
+            TextSwitch {
+                id: activeLocation
+                visible: useLocation && currentIndex > notesInfo.count-1
+                checked: locationBasedNote
+                text: qsTr("Use the current location instead of the map center")
+                onCheckedChanged: {
+                    console.log("test")
+                    checked ? locationBasedNote = true: locationBasedNote = false;
+                    Mysettings.saveSettings();
+                }
+            }
+
             Button {
                 text: qsTr("Current location")
                 anchors.horizontalCenter: parent.horizontalCenter
-                enabled:useLocation
+                visible:useLocation && currentIndex < notesInfo.count
                 onClicked: {
                     latti.text = gpsLat;
                     latti.reNu = latti.text;
                     longi.text = gpsLong;
                     longi.reNu = longi.text;
                     if (currentIndex < notesInfo.count) {
+                        notesInfo.setProperty(currentIndex,"latti",latti.reNu);
+                        notesInfo.setProperty(currentIndex,"longi",longi.reNu)
+                        Mytables.addEditNote(currentIndex)
+                    }
+                }
+            }
+
+            Button {
+                text: qsTr("Map center")
+                anchors.horizontalCenter: parent.horizontalCenter
+                visible:currentIndex < notesInfo.count
+                onClicked: {
+                    console.log("mc", currentIndex, notesInfo.count)
+                    latti.text = currentLat;
+                    latti.reNu = latti.text;
+                    longi.text = currentLong;
+                    longi.reNu = longi.text;
+                    if (currentIndex < notesInfo.count-1) {
                         notesInfo.setProperty(currentIndex,"latti",latti.reNu);
                         notesInfo.setProperty(currentIndex,"longi",longi.reNu)
                         Mytables.addEditNote(currentIndex)

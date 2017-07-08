@@ -168,6 +168,8 @@ Page {
                             onClicked: {
                                 currentIndex = index
                                 //addMode = false
+                                currentLat = map.center.latitude
+                                currentLong = map.center.longitude
                                 pageStack.push(Qt.resolvedUrl("AddNote.qml"))
                             }
                         }

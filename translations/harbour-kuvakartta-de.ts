@@ -170,15 +170,23 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>Current location</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <source>Project</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
         <source>Edit a note</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Use the current location instead of the map center</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Current location</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Map center</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

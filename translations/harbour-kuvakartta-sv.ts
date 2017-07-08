@@ -170,16 +170,24 @@
         <translation>Min notis</translation>
     </message>
     <message>
-        <source>Current location</source>
-        <translation>Aktuell plats</translation>
-    </message>
-    <message>
         <source>Project</source>
         <translation>Projekt</translation>
     </message>
     <message>
         <source>Edit a note</source>
         <translation>Redigera en notis</translation>
+    </message>
+    <message>
+        <source>Use the current location instead of the map center</source>
+        <translation>Använd aktuell position istället för kartcentrum</translation>
+    </message>
+    <message>
+        <source>Current location</source>
+        <translation>Aktuell position</translation>
+    </message>
+    <message>
+        <source>Map center</source>
+        <translation>Kartcentrum</translation>
     </message>
 </context>
 <context>
